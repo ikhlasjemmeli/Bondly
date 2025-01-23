@@ -1,0 +1,33 @@
+
+<div class="row mt-3">
+<div class="d-flex justify-content-center m-2">
+  <div class="rounded-circle" style="width: 150px; height: 150px; overflow: hidden; background-color: #f0f0f0;">
+    <img src="https://miro.medium.com/v2/resize:fit:2400/2*Ip34iu-upqis6XbBVK3ARA.jpeg" alt="" class="img-fluid" style="width: 100%; height: 100%; object-fit: cover;">
+  </div>
+ 
+</div>
+<h3 class="fw-bold">{{profileById.firstName}}  {{profileById.lastName}}</h3>
+<small class="fs-5 ">{{ConvertDate(profileById.dateOfBirth )}}</small>
+<small class="fs-5 ">{{profileById.situation}}</small>
+<small class="fs-5 ">{{profileById.study}}</small>
+<small class="fs-5 p-4">{{profileById.bio}}</small>
+</div>
+<div class="row">
+
+<mat-list>
+    <mat-list-item>
+      <mat-icon matListIcon>group</mat-icon>
+      Friends</mat-list-item>
+    <mat-divider></mat-divider>
+    <mat-list-item>
+      <mat-icon matListIcon>post_add</mat-icon>
+      Posts</mat-list-item>
+    <mat-divider></mat-divider>
+    
+    <mat-list-item >
+      <mat-icon matListIcon matBadge="15">chat</mat-icon>
+      
+      Chats</mat-list-item>
+
+  </mat-list>
+</div>

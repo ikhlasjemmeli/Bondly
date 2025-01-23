@@ -1,0 +1,31 @@
+<div class="container" >
+  <div class="row" style="border-radius: 10px; box-shadow: 0px 0px 50px 20px rgb(190, 190, 190); height: 90vh; margin-top: 5vh; padding: 5%;">
+    <div class="col-md-6 text-center" style="margin-top: 15%;">
+      <h1 style="font-weight: bold;">Login</h1>
+      <form  [formGroup]="loginForm">
+        <mat-form-field class="example-full-width">
+          <mat-label>Email</mat-label>
+          <input matInput placeholder="Ex. John.Doe@gmail.com" formControlName="email" required>
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+          <mat-label>Password</mat-label>
+          <input type="password" matInput placeholder="" formControlName="password" required>
+        </mat-form-field><br>
+        <small class="text-danger fw-bold fs-4" style="cursor: pointer;  " (click)="openDialog()">Forget Password</small>
+        <div class="example-flex-container" style="margin-top:20px;">
+          <div class="example-button-container">
+            <button style="background-color: rgb(34, 53, 224); color: white;" mat-fab extended [disabled]="!loginForm.valid" (click)="Login()">
+              LOGIN
+            </button>
+          </div>
+        </div>
+      </form>
+      <h4 style="margin-top:10px; margin-left: -40px;">Don't have an account ? <a style="cursor: pointer;" [routerLink]="['/SignUp']">Sign up</a></h4>
+                  
+              
+    </div>
+    <div class="col-md-6 d-none d-lg-block text-center">
+      <img src="../../../assets/login.png" alt="" style="width: 100%; height: auto; margin-top: 10%;">
+    </div>
+  </div>
+</div>
