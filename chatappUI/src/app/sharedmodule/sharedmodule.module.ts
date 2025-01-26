@@ -6,6 +6,7 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatIconModule } from '@angular/material/icon';
 import { ChatsComponent } from '../Core/Dashbord/chats/chats.component';
 import { PostsComponent } from '../Core/Dashbord/posts/posts.component';
+import { AboutComponent } from '../Core/Profiles/about/about.component';
 
 
 
@@ -13,7 +14,9 @@ import { PostsComponent } from '../Core/Dashbord/posts/posts.component';
   declarations: [
     StatisticsComponent,
     ChatsComponent,
-    PostsComponent
+    PostsComponent,
+    AboutComponent
+    
   ],
   imports: [
     CommonModule,
@@ -24,7 +27,8 @@ import { PostsComponent } from '../Core/Dashbord/posts/posts.component';
   exports: [
     StatisticsComponent,
     ChatsComponent,
-    PostsComponent
+    PostsComponent,
+    AboutComponent
   ]
 })
 export class SharedmoduleModule { }

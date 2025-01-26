@@ -1,0 +1,41 @@
+.cover{
+    // position: absolute;
+      width: 100%;
+      height: 100%;
+      background-color: rgb(238, 236, 236); 
+      cursor: pointer;
+     // border-radius: 50%;
+     border: none;
+   
+      
+      
+  }
+
+  .cover-div {
+    position: relative;
+    width: 100%;
+    height: 200px;
+   // border-radius: 50%;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f0f0f0;
+   // bottom: 20px; 
+    //left: 30%; 
+    
+  }
+
+  .cover-image {
+    // position: absolute;
+     width: 100%;
+     height: 95%;
+     object-fit: cover;
+    // border-radius: 50%;
+    // left: -18%;
+    // top:-3%;
+    justify-content: center;
+    align-items: center;
+   
+     
+   }

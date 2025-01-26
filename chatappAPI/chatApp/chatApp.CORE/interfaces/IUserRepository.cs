@@ -10,10 +10,11 @@ namespace chatApp.CORE.interfaces
 {
     public interface IUserRepository : IBaseRepository<User>
     {
-        void AddUser(UserDto User);
+        User AddUser(UserDto User);
         User GetUserByEmail(string email);
        Task<string> Authenticate(LoginDto user);
         User getUserInformationFormJwtToken(string token);
+        Task<string> updatePassword(string userId, PasswordDto passwordDto);
 
 
 

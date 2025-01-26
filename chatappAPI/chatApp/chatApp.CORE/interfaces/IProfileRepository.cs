@@ -6,6 +6,7 @@ namespace chatApp.CORE.interfaces
     public interface IProfileRepository : IBaseRepository<Profile>
     {
         Task<object> getProfileById(Guid UserId);
-        Task<string> CompleteProfile(Guid UserId, ProfileDto profile);
+        Task<string> CompleteProfile(string UserId, ProfileDto profile);
+        Task<string> updateProfilePicture(string path, string userId);
     }
 }

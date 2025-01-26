@@ -31,11 +31,19 @@ namespace chatApp.Api.Controllers
 
 
         [HttpPost("CompleteProfile")]
-        public async Task<ActionResult> CompleteProfile(Guid userId, [FromBody] ProfileDto profile)
+        public async Task<ActionResult> CompleteProfile(string userId, [FromBody] ProfileDto profile)
         {
-            var profileToAdd= await _unitOfWork.Profiles.CompleteProfile(userId,profile);
+            var profileCompleted= await _unitOfWork.Profiles.CompleteProfile(userId,profile);
             _unitOfWork.complete();
-            return Ok(profileToAdd);
+            return Ok(profileCompleted);
+        }
+
+        [HttpPut("UpdateProfilePicture")]
+        public async Task<ActionResult> UpdateProfilePicture(string userId, string path)
+        {
+            var pictureaded = await _unitOfWork.Profiles.updateProfilePicture(path,userId);
+            _unitOfWork.complete();
+            return Ok();
         }
 
     }

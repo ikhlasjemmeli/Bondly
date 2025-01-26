@@ -1,5 +1,6 @@
 ﻿using chatApp.CORE.Dtos;
 using chatApp.CORE.interfaces;
+using chatApp.CORE.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace chatApp.Api.Controllers
@@ -24,25 +25,32 @@ namespace chatApp.Api.Controllers
         [HttpPost("Sign Up")]
         public IActionResult SignUp([FromBody] UserDto user)
         {
-
             if (user != null)
             {
                 var existingUser = _unitOfWork.Users.GetUserByEmail(user.Email);
-                if (existingUser != null)
+                if (existingUser == null)
                 {
+                    var userAded = _unitOfWork.Users.AddUser(user);
+                    _unitOfWork.complete();
 
-                    return BadRequest(new { message = "A user account already exists with this email. Please try using a different email or logging in." });
+                    var profile = new Profile
+                    {
+                        UserId = userAded.Id
+                    };
+                   
+                    _unitOfWork.Profiles.Add(profile);
+                    _unitOfWork.complete();
+
+                    return Ok(user);
                 }
                 else
                 {
-                    _unitOfWork.Users.AddUser(user);
-                    _unitOfWork.complete();
-                    return Ok(user);
+                    return BadRequest(new { message = "A user account already exists with this email. Please try using a different email or logging in." });
                 }
             }
             return BadRequest(new { message = "Invalid user data." });
-
         }
+
 
         [HttpPost("Authenticate")]
         public async Task<ActionResult> Authenticate([FromBody] LoginDto user)
@@ -51,6 +59,29 @@ namespace chatApp.Api.Controllers
             var connectedUser = _unitOfWork.Users.getUserInformationFormJwtToken(token);
             return Ok(new {Token =token, ConnectedUser=connectedUser} );
         }
+
+        [HttpDelete("DeleteAccount")]
+        public ActionResult Delete(string userId)
+        {
+            _unitOfWork.Users.Delete(Guid.Parse(userId));
+            _unitOfWork.complete();
+            return Ok();
+        }
+
+        [HttpPut("UpdatePassword")]
+        public async Task<ActionResult> UpdatePassword(string userId, PasswordDto passwordDto)
+        {
+            var passwordToUpdate = await _unitOfWork.Users.updatePassword(userId, passwordDto);
+            _unitOfWork.complete();
+
+            if (passwordToUpdate == "Your password has been successfully updated.")
+            {
+                return Ok(new { message = passwordToUpdate }); 
+            }
+
+            return BadRequest(new { message = passwordToUpdate }); 
+        }
+
 
     }
 }

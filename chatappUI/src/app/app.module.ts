@@ -10,7 +10,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
-import { MAT_DATE_FORMATS, MAT_DATE_LOCALE, MatNativeDateModule } from '@angular/material/core';
+import { MAT_DATE_FORMATS, MAT_DATE_LOCALE, MatNativeDateModule, MatOptionModule } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { LoginComponent } from './Account/login/login.component';
 import { LoginModule } from './Account/login/login.module';
@@ -28,6 +28,16 @@ import { PostsComponent } from './Core/Dashbord/posts/posts.component';
 import { MatButtonModule } from '@angular/material/button';
 import { AddPostComponent } from './Core/Dashbord/add-post/add-post.component';
 import { DialogCommentComponent } from './Core/Dashbord/dialog-comment/dialog-comment.component';
+import { HomeComponent } from './Core/home/home.component';
+import { HomeModule } from './Core/home/home.module';
+import { ProfileComponent } from './Core/Profiles/profile/profile.component';
+import { ProfileModule } from './Core/Profiles/profile/profile.module';
+import { AboutComponent } from './Core/Profiles/about/about.component';
+import { AboutModule } from './Core/Profiles/about/about.module';
+import { EditprofileComponent } from './Core/Profiles/editprofile/editprofile.component';
+import { MatSelectModule } from '@angular/material/select';
+import { DeleteAccountComponent } from './Core/Profiles/delete-account-post/delete-account.component';
+import { EditpasswordComponent } from './Core/Profiles/editpassword/editpassword.component';
 
 
 @NgModule({
@@ -36,6 +46,12 @@ import { DialogCommentComponent } from './Core/Dashbord/dialog-comment/dialog-co
     ForgetPasswordDialogComponent,
     AddPostComponent,
     DialogCommentComponent,
+    EditprofileComponent,
+    DeleteAccountComponent,
+    EditpasswordComponent,
+  
+    //ProfileComponent,
+    //HomeComponent,
    // PostsComponent,
    // ChatsComponent,
   //StatisticsComponent
@@ -60,7 +76,12 @@ import { DialogCommentComponent } from './Core/Dashbord/dialog-comment/dialog-co
     MatDialogModule,
     MatFormFieldModule, 
     MatInputModule, 
-     MatButtonModule, 
+     MatButtonModule,
+     HomeModule, 
+     ProfileModule,
+     AboutModule,
+     MatSelectModule,
+     MatOptionModule,
     //StatisticsModule,
     ToastrModule.forRoot({ // Configuration globale
       timeOut: 3000, // Durée par défaut des toasts (ms)

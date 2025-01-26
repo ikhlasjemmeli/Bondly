@@ -53,4 +53,29 @@ showError() {
   Login(item :any) : Observable<any>{
     return this.http.post<any>(`${this.baseUrl}/Authenticate`, item) 
   }
+
+  DeleteAccount() : Observable<any>{
+    const connectedUserJson = localStorage.getItem('ConnectedUser');
+    var id ;
+    if (connectedUserJson) {
+      const connectedUser = JSON.parse(connectedUserJson);
+      id = connectedUser.id;
+    }
+    return this.http.delete(`${this.baseUrl}/DeleteAccount?userId=${id}`)
+
+  }
+
+  editPassword(item: any): Observable<any> {
+    const connectedUserJson = localStorage.getItem('ConnectedUser');
+    let id: any;
+    if (connectedUserJson) {
+      const connectedUser = JSON.parse(connectedUserJson);
+      id = connectedUser.id;
+    }
+  
+    return this.http.put(`${this.baseUrl}/UpdatePassword?userId=${id}`, item, {
+      responseType: 'json',
+    });
+  }
+  
 }

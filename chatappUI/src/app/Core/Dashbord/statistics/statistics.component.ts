@@ -17,7 +17,7 @@ profileById= this.profileService.profileById
   ngOnInit(): void {
     this.ProfileByIdSubscription = this.profileService.profileById$.subscribe( p=>{
      this.profileById=p
-     console.log("profile",this.profileById)
+    
     });
     this.profileService.getProfileById()
   }

@@ -17,17 +17,18 @@ namespace chatApp.EF.Repositories
         }
         public User GetUserByEmail(string email)
         {
-            return _context.Users.First(x => x.Email == email);
+            return _context.Users.FirstOrDefault(x => x.Email == email);
         }
-        public void AddUser(UserDto User)
+        public User AddUser(UserDto User)
         {
             if (User != null)
             {
-
                 var userToAdd = new User { FirstName = User.FirstName, LastName = User.LastName, DateOfBirth = User.DateOfBirth, Email = User.Email, Password = User.Password };
                 _context.Users.Add(userToAdd);
 
+                return userToAdd;
             }
+            return null;
         }
 
         public User getUserInformationFormJwtToken(string token )
@@ -105,5 +106,49 @@ namespace chatApp.EF.Repositories
                 return "Error: No data provided. Please check your input.";
             }
         }
+
+       public void  DeleteUser(string userId)
+        {
+            var user = _context.Users.FirstOrDefault(u => u.Id == Guid.Parse(userId));
+            //var profile = _context.Profiles.FirstOrDefault(p => p.UserId == Guid.Parse(userId));
+            _context.Users.Remove(user);
+            //_context.Profiles.Remove(profile);
+        }
+
+
+        public async Task<string> updatePassword(string userId, PasswordDto passwordDto){
+            if (userId != null)
+            {
+                var user = await _context.Users.FirstOrDefaultAsync(u=>u.Id == Guid.Parse(userId));
+                if (user != null)
+                {
+                    if(user.Password != passwordDto.Password)
+                    {
+                        return "The password you entered is incorrect. Please try again.";
+                    }
+                    else
+                    {
+                        if(passwordDto.NewPassword != passwordDto.ConfirmPassword)
+                        {
+                            return "The new password and confirmation password do not match. Please try again.";
+                        }
+                        else
+                        {
+                            user.Password = passwordDto.NewPassword;
+                            _context.Users.Update(user);
+                            return "Your password has been successfully updated.";
+                        }
+                    }
+                }
+                else
+                {
+                    return "user is null";
+                }
+            }
+            else
+            {
+                return "userId is null";
+            }
+        } 
     }
 }

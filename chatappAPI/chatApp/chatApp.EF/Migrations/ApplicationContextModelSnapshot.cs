@@ -22,6 +22,35 @@ namespace chatApp.EF.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("chatApp.CORE.Models.Post", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("postPath")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("privacy")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("publicationDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Posts");
+                });
+
             modelBuilder.Entity("chatApp.CORE.Models.Profile", b =>
                 {
                     b.Property<Guid>("Id")
@@ -87,6 +116,15 @@ namespace chatApp.EF.Migrations
                     b.ToTable("Users");
                 });
 
+            modelBuilder.Entity("chatApp.CORE.Models.Post", b =>
+                {
+                    b.HasOne("chatApp.CORE.Models.User", null)
+                        .WithMany("Posts")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("chatApp.CORE.Models.Profile", b =>
                 {
                     b.HasOne("chatApp.CORE.Models.User", null)
@@ -98,6 +136,8 @@ namespace chatApp.EF.Migrations
 
             modelBuilder.Entity("chatApp.CORE.Models.User", b =>
                 {
+                    b.Navigation("Posts");
+
                     b.Navigation("Profile")
                         .IsRequired();
                 });

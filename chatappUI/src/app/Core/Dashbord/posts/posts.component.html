@@ -1,35 +1,42 @@
-<div class="bg-light  mt-3 rounded " style="width: 100%;">
-<div class="row">
-    <div class="col-2">
+<div *ngFor="let post of postsbyId" class="bg-light mt-3 rounded" style="width: 100%;">
+    <div class="row ">
+      <div class="col-1">
         <div class="d-flex justify-content-center m-2">
-            <div class="rounded-circle" style="width: 50px; height: 50px; overflow: hidden; background-color: #f0f0f0;">
-              <img src="https://miro.medium.com/v2/resize:fit:2400/2*Ip34iu-upqis6XbBVK3ARA.jpeg" alt="" class="img-fluid" style="width: 100%; height: 100%; object-fit: cover;">
-            </div>
+          <div class="rounded-circle" style="width: 50px; height: 50px; overflow: hidden; background-color: #f0f0f0;">
+            <img [src]="post.image || 'https://miro.medium.com/v2/resize:fit:2400/2*Ip34iu-upqis6XbBVK3ARA.jpeg'" 
+                 alt="" 
+                 class="img-fluid" 
+                 style="width: 100%; height: 100%; object-fit: cover;">
           </div>
+        </div>
+      </div>
+      <div class="col-9 text-left mt-2 ">
+        <div class="row fs-2">{{ post.userFirstName }} {{ post.userLastName }}</div>
+        <div class="row fs-3">
+          <h3>{{ post.publicationDate | date }}   
+            <mat-icon *ngIf="post.privacy === 'Public'">public</mat-icon>
+            <mat-icon *ngIf="post.privacy === 'Friends'">groups</mat-icon>
+            <mat-icon *ngIf="post.privacy === 'Me only'">lock</mat-icon>
+          </h3>
+         
+        </div>
+      </div>
+      <div class="col-2 text-right">
+        <mat-icon style="cursor:pointer" (click)="openDialogDelete(post,'post')">delete</mat-icon>
+
+      </div>
     </div>
-
-    <div class="col-10 text-left mt-2">
-       <div class="row"> FirstName and LastName</div>
-       <div class="row"><h5>date </h5>
+    <div class="row text-left m-4 p-6">
+      <h4>{{ post.description }}</h4>
     </div>
-</div>
-<div class="row text-left m-4 p-6">
-    <h4>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi ducimus soluta sunt dolore inventore! Reprehenderit mollitia vitae iure repellendus magni et qui officiis cum ipsa, nobis excepturi fugiat, nostrum sequi.</h4>
-</div>
-
-</div>
-<div class="row text-center row-cols-auto p-3">
-    <div class="col " style="cursor: pointer;">❤️</div>
-    <div class="col" style="cursor: pointer;">😂</div>
-    <div class="col" style="cursor: pointer;">😊</div>
-    <div class="col" style="cursor: pointer;">👏</div>
-    <div class="col" style="cursor: pointer;">👍</div>
-    <div class="col" style="cursor: pointer;"><i class="bi bi-chat-right-quote" (click)="openDialog()"></i></div>
-</div>
-
-<mat-divider></mat-divider>
-
-
-
-
-
+    <div class="row text-center row-cols-auto p-3">
+      <div class="col" style="cursor: pointer;">❤️</div>
+      <div class="col" style="cursor: pointer;">😂</div>
+      <div class="col" style="cursor: pointer;">😊</div>
+      <div class="col" style="cursor: pointer;">👏</div>
+      <div class="col" style="cursor: pointer;">👍</div>
+      <div class="col" style="cursor: pointer;"><i class="bi bi-chat-right-quote" (click)="openDialog()"></i></div>
+    </div>
+    <mat-divider></mat-divider>
+  </div>
+  

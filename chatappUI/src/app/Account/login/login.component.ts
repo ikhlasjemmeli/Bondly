@@ -29,7 +29,7 @@ Login(){
           localStorage.setItem('Token',data.token)
           localStorage.setItem('ConnectedUser',JSON.stringify(data.connectedUser))
           this.toastr.success('Login successful!', 'Success')
-          this.router.navigate(['/dashboard']);
+          this.router.navigate(['/home/dashboard']);
         }
         
         

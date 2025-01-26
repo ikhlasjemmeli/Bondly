@@ -1,0 +1,49 @@
+<div style="width: 500px; height: 565px;">
+    <h2 mat-dialog-title class="text-center border">Personalize Your Profile</h2>
+    
+<form  [formGroup]="CompleteProfile">
+    <mat-dialog-content >
+
+        <div class="row ">
+            <mat-form-field class="example-full-width">
+                <mat-label>A Glimpse Into My World</mat-label>
+                <textarea matInput placeholder="Ex. I’m passionate about art, coding, and exploring new cultures..." style="height: 90px;" formControlName="bio" required></textarea>
+              </mat-form-field>
+        </div>
+        <div class="row mt-1">
+            <mat-form-field class="example-full-width">
+                <mat-label>Where I Build Dreams</mat-label>
+                <input matInput placeholder="Ex. Software engineer based in Paris." formControlName="workPlace" required>
+              </mat-form-field>
+        </div>
+        <div class="row mt-1">
+            <mat-form-field class="example-full-width">
+                <mat-label>The Journey of Learning</mat-label>
+                <input matInput placeholder="Ex. Currently exploring AI, Web3, and cloud computing." formControlName="study" required>
+              </mat-form-field>
+        </div>
+
+        <div class="row mt-1">
+            <mat-form-field class="example-full-width">
+              <mat-label>Love & Life</mat-label>
+              <mat-select formControlName="situation" required>
+                <mat-option *ngFor="let relationship of relationshipStatuses" [value]="relationship.value" >
+                  {{ relationship.viewValue }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          
+          
+           
+    </mat-dialog-content>
+    <div class="example-button-container text-center " >
+        <button mat-fab extended  style="background-color: rgb(57, 57, 202); color: white; width: 200px;" [mat-dialog-close]="true" (click)="EditProfile()" [disabled]="!CompleteProfile.valid">
+        
+            Update Profile
+        </button>
+      </div>
+
+    </form>
+    </div>
+    

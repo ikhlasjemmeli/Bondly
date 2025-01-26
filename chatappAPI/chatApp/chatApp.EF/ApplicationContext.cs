@@ -10,9 +10,10 @@ namespace chatApp.EF
         {
         }
 
-        // Définissez vos DbSets ici
+      
         public DbSet<User> Users { get; set; }
         public DbSet<Profile> Profiles { get; set; }
+        public DbSet<Post> Posts { get; set; }
     }
 
 }

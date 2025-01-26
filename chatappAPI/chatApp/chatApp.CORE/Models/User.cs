@@ -9,9 +9,10 @@ namespace chatApp.CORE.Models
         public string LastName { get; set; }
         public string Email { get; set; }
         public DateTime DateOfBirth { get; set; }
-        [JsonIgnore]
+       // [JsonIgnore]
         public string Password { get; set; }
         public Profile Profile { get; set; }
+        public ICollection<Post> Posts { get; set; }
 
     }
 }

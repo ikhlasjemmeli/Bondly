@@ -12,10 +12,13 @@ namespace chatApp.EF.Repositories
         public readonly ApplicationContext _context;
         public IUserRepository Users { get; set; }
         public IProfileRepository Profiles { get; set; }
+
+        public IPostRepository Posts { get; set; }
         public UnitOfWork(ApplicationContext context)
         {
 
             _context = context;
+            Posts = new PostRepository(_context);
             Users = new UserRepository(_context);
             Profiles = new ProfileRepository(_context);
 

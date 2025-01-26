@@ -1,0 +1,35 @@
+<nav class="navbar navbar-expand-lg bg-body-tertiary fixed-top">
+    <div class="container-fluid">
+     
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0 fs-3">
+          <li class="nav-item">
+            <img src="../../../assets/logo_bondly.png" alt="" style="width:100px; height: 50px;">
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" [routerLink]="['/home/dashboard']">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" [routerLink]="['/home/profile']">Profile</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Contacts</a>
+          </li>
+         
+        
+        </ul>
+        <form class="d-flex" role="search">
+          <input class="form-control me-2 mt-2"style="width: 500px; font-size:13px; height:40px" type="search" placeholder="Search" aria-label="Search">
+        
+          <button mat-fab extended style="background-color: rgb(61, 55, 237); color: white;">
+            <mat-icon  >search</mat-icon>
+            Search
+          </button>
+        </form>
+      </div>
+    </div>
+  </nav>
+<router-outlet></router-outlet>

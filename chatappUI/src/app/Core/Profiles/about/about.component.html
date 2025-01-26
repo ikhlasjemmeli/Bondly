@@ -1,0 +1,55 @@
+<h1 class="mt-2 text-center">🌟 Get to Know Me!</h1>
+
+
+   <div class="row">
+    <div class="col-4">
+        <h2>✨ A Glimpse Into My World:</h2>
+    </div>
+    <div class="col-8">
+       {{ProfileById.bio}} 
+    </div>
+   </div>
+   <mat-divider></mat-divider>
+
+   <div class="row">
+    <div class="col-4">
+         <h2>🏢 Where I Build Dreams:</h2>
+</div>
+<div class="col-8 pt-3">  
+    <h3 class=" fs-3"> {{ProfileById.workPlace}}</h3>
+
+    </div>
+   </div>
+   <mat-divider></mat-divider>
+
+
+   <div class="row">
+    <div class="col-4">
+    <h2>🎓 The Journey of Learning:</h2>
+    </div>
+    <div class="col-8 pt-3">
+        <h3 class=" fs-3">   {{ProfileById.study}} </h3>
+   </div>
+   </div>
+   <mat-divider></mat-divider>
+
+
+   <div class="row">
+    <div class="col-4">
+    <h2>💞 Love & Life:</h2>
+    </div>
+    <div class="col-8 pt-3">
+      <h3 class=" fs-3">  {{ProfileById.situation}}</h3>
+   </div>
+   </div>
+<mat-divider></mat-divider>
+   <div class="row">
+    <div class="col-4">
+    <h2>🎉 Birthday Celebration:</h2>
+    </div>
+    <div class="col-8  pt-3" >
+       <h3 class=" fs-3"> {{ConvertDate( ProfileById.dateOfBirth)}} </h3>
+   </div>
+   </div>
+
+
