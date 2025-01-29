@@ -30,12 +30,12 @@
       <h4>{{ post.description }}</h4>
     </div>
     <div class="row text-center row-cols-auto p-3">
-      <div class="col" style="cursor: pointer;">❤️</div>
-      <div class="col" style="cursor: pointer;">😂</div>
-      <div class="col" style="cursor: pointer;">😊</div>
-      <div class="col" style="cursor: pointer;">👏</div>
-      <div class="col" style="cursor: pointer;">👍</div>
-      <div class="col" style="cursor: pointer;"><i class="bi bi-chat-right-quote" (click)="openDialog()"></i></div>
+      <div class="col" style="cursor: pointer;" (click)="AddReact('love', post.id)">{{getReactionCount(post.react,5)}}❤️</div>
+      <div class="col" style="cursor: pointer;" (click)="AddReact('haha',post.id)">{{getReactionCount(post.react,4)}}😂</div>
+      <div class="col" style="cursor: pointer;" (click)="AddReact('smile',post.id)">{{getReactionCount(post.react,3)}}😊</div>
+      <div class="col" style="cursor: pointer;" (click)="AddReact('clap',post.id)">{{getReactionCount(post.react,2)}}👏</div>
+      <div class="col" style="cursor: pointer;" (click)="AddReact('like',post.id)">{{getReactionCount(post.react,1)}}👍</div>
+      <div class="col" style="cursor: pointer;" >{{post.comments.length}} <i class="bi bi-chat-right-quote" (click)="openDialog(post)"></i> </div>
     </div>
     <mat-divider></mat-divider>
   </div>

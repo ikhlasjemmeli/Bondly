@@ -64,14 +64,15 @@ ConvertDate(date: Date): string {
 }
 AddPost(){
   if(this.AddPostForm.value !=null){
-    this.profileService.Addpost(this.AddPostForm.value).subscribe(data=>{
+    this.profileService.Addpost(this.AddPostForm.value)
+    this.profileService.getPostById()/*.subscribe(data=>{
         console.log("post aded ")
       
-       this.profileService.getPostById()
+      
     },
   error=>{
       console.log(error)
-  });
+  });*/
   
     
   }

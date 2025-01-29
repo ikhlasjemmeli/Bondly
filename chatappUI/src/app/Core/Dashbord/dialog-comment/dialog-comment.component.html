@@ -1,59 +1,113 @@
-<div style="width: 400px;height: 600px; overflow-x: hidden;">
-<h5 mat-dialog-title class="border">❤️😂👍 100 <i class="bi bi-chevron-compact-right"></i></h5>
-<mat-dialog-content>
-
-    <div style="height: 400px; ">
-<div class="mt-4 bg-body-secondary rounded">
- <div class="row ">
-    <div class="col-3">
-         <div class="d-flex justify-content-center m-2">
-            <div class="rounded-circle" style="width: 50px; height: 50px; overflow: hidden; background-color: #f0f0f0;">
-              <img src="https://miro.medium.com/v2/resize:fit:2400/2*Ip34iu-upqis6XbBVK3ARA.jpeg" alt="" class="img-fluid" style="width: 100%; height: 100%; object-fit: cover;">
+<div style="width: 450px; height: 600px; overflow-x: hidden;">
+  <h5 mat-dialog-title class="border fs-1">
+    <i class="bi bi-chevron-compact-left" style="cursor: pointer;" *ngIf="pageReaction==false" (click)="getReactions()"></i>
+    ❤️😂👍 {{ totalReactions }}
+    <i class="bi bi-chevron-compact-right" style="cursor: pointer;" *ngIf="pageReaction==true" (click)="getReactions()"></i>
+  </h5>
+  
+  <mat-dialog-content *ngIf="pageReaction==true">
+    <div style="height: 400px; overflow-y: auto; overflow-x: hidden;">
+      
+      <div
+        *ngFor="let comment of comments"
+        class="mt-4 bg-body-secondary rounded"
+      >
+        <div class="row">
+          <div class="col-3">
+            <div class="d-flex justify-content-center m-2">
+              <div
+                class="rounded-circle"
+                style="width: 50px; height: 50px; overflow: hidden; background-color: #f0f0f0;"
+              >
+                <img
+                  src="https://miro.medium.com/v2/resize:fit:2400/2*Ip34iu-upqis6XbBVK3ARA.jpeg"
+                  alt=""
+                  class="img-fluid"
+                  style="width: 100%; height: 100%; object-fit: cover;"
+                />
+              </div>
             </div>
           </div>
+          <div class="col-9 text-left">
+            {{ comment.userFirstName }} {{comment.userLastName}}
+            <br />
+            <small class="fs-5">{{ comment.date | date: 'short' }}</small>
+          </div>
+        </div>
+        <div class="row p-4 pt-1 fs-5">{{ comment.description }}</div>
+      </div>
     </div>
-    <div class="col-9 text-left">
-        Firstname Lastname 
-        <br>
-       <small class="fs-5">12/02/2025</small>
-    </div>
-    
- </div>
- <div class="row p-4 pt-1 fs-5">
-    Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia consectetur nemo qui iste vero, veniam asperiores a nam eius! Natus adipisci, quae alias nesciunt fugit obcaecati hic voluptas molestias sit?
- </div>
-</div>
+  </mat-dialog-content>
 
+  <form [formGroup]="AddCommentForm" *ngIf="pageReaction==true">
+    <div class="row mt-2 p-2">
+      <div class="col-2">
+        <div class="d-flex justify-content-center m-2">
+          <div
+            class="rounded-circle"
+            style="width: 40px; height: 45px; overflow: hidden; background-color: #f0f0f0;"
+          >
+            <img
+              src="https://miro.medium.com/v2/resize:fit:2400/2*Ip34iu-upqis6XbBVK3ARA.jpeg"
+              alt=""
+              class="img-fluid"
+              style="width: 100%; height: 100%; object-fit: cover;"
+            />
+          </div>
+        </div>
+      </div>
 
-
-</div>
-
-
-
- 
-</mat-dialog-content>
-
-<div class="row mt-2 p-2">
-    <div class="col-2">
-      <div class="d-flex justify-content-center m-2">
-        <div class="rounded-circle" style="width: 50px; height: 50px; overflow: hidden; background-color: #f0f0f0;">
-          <img src="https://miro.medium.com/v2/resize:fit:2400/2*Ip34iu-upqis6XbBVK3ARA.jpeg" alt="" class="img-fluid" style="width: 100%; height: 100%; object-fit: cover;">
+      <div class="col-8">
+        <mat-form-field class="example-full-width">
+          <mat-label>Comment</mat-label>
+          <input matInput formControlName="description" required />
+        </mat-form-field>
+      </div>
+      <div class="col-1 mt-3">
+        <div class="example-button-row">
+          <button
+            mat-mini-fab
+            aria-label
+            style="background-color: rgb(31, 31, 238); color: white;"
+            (click)="AddComment()"
+            [disabled]="AddCommentForm.invalid"
+          >
+            <i class="bi bi-send"></i>
+          </button>
         </div>
       </div>
     </div>
-    <div class="col-8">
-        <mat-form-field class="example-full-width" >
-            <mat-label>Favorite food</mat-label>
-            <input matInput placeholder="Ex. Pizza" value="Sushi">
-          </mat-form-field>
-        
-    </div>
-    <div class="col-2">
-        <div class="example-button-row">
-            <button mat-raised-button>Basic</button>
-        </div>
-    </div>
+  </form> 
 
+  <div class="row text-center border-bottom pb-3" *ngIf="pageReaction==false">
+    <div class="col fs-2" ><span style="cursor: pointer;" (click)="getReactionUsers(post.react,5)">{{getReactionCount(post.react,5)}}❤️</span></div>
+    <div class="col fs-2"><span style="cursor: pointer;" (click)="getReactionUsers(post.react,4)">{{getReactionCount(post.react,4)}}😂</span></div>
+    <div class="col fs-2"><span style="cursor: pointer;"(click)="getReactionUsers(post.react,3)">{{getReactionCount(post.react,3)}}😊</span></div>
+    <div class="col fs-2"><span style="cursor: pointer;"(click)="getReactionUsers(post.react,2)">{{getReactionCount(post.react,2)}}👏</span></div>
+    <div class="col fs-2"><span style="cursor: pointer;"(click)="getReactionUsers(post.react,1)">{{getReactionCount(post.react,1)}}👍</span></div>
+  </div>
+  <div *ngIf="pageReaction==false">
+  <div *ngFor="let react of ReactionsFiltred" class="p-4 m-2" >
+  <div class="row fs-2">
+    <div class="col-2">
+      <div class="d-flex justify-content-center ">
+        <div
+          class="rounded-circle"
+          style="width: 35px; height: 35px; overflow: hidden; background-color: #f0f0f0;"
+        >
+          <img
+            src="https://miro.medium.com/v2/resize:fit:2400/2*Ip34iu-upqis6XbBVK3ARA.jpeg"
+            alt=""
+            class="img-fluid"
+            style="width: 100%; height: 100%; object-fit: cover;"
+          />
+        </div>
+      </div>
+    </div>
+    <div class="col mt-3">
+    {{react.userFirstName}}   {{react.userLastName}}</div>
+  </div>
 </div>
-  
 </div>
+</div>
+

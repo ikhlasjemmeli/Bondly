@@ -11,7 +11,7 @@ import { ProfileService } from 'src/app/Services/ProfileService/profile.service'
 })
 export class DeleteAccountComponent implements OnInit{
 title:string=''
-constructor(private userService :AuthServiceService,private profile:ProfileService, private router :Router,@Inject(MAT_DIALOG_DATA) public type: any,@Inject(MAT_DIALOG_DATA) public post: any){
+constructor(private userService :AuthServiceService,private profile:ProfileService, private router :Router,@Inject(MAT_DIALOG_DATA) public type: any){
 
 }
 
@@ -33,8 +33,9 @@ ngOnInit(): void {
     console.log(error);
   });
 }
- if(this.type=="post"){
-  this.profile.DeletePost(this.post.id)
+ if(this.type.type=="post"){
+  
+  this.profile.DeletePost(this.type.post.id)
  }
     
   }

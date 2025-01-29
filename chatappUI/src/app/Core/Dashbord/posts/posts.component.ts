@@ -14,9 +14,9 @@ export class PostsComponent {
   @Input() postsbyId: any[] = [];
   
   constructor(private profile:ProfileService){}
-  openDialog() {
+  openDialog(post:any) {
     this.dialog.open(DialogCommentComponent, {
-    
+    data:post
     });
   }
 
@@ -26,6 +26,15 @@ export class PostsComponent {
       data: { post, type }
       
   });}
+
+  AddReact(type:string,postId:string){
+    this.profile.AddReact(type,postId)
+  }
+
+  getReactionCount(reactions:any[],id :number):number{
+    return reactions.filter(reaction => reaction.reactionTypeId === id).reduce((sum, react) => sum + react.number, 0);
+
+  }
  /* deletePost(post :any){
  
      this.profile.DeletePost(post.id) /*.subscribe(data=>{

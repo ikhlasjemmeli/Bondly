@@ -14,6 +14,10 @@ export class ProfileService {
   postById$ = this.postByIdSubject.asObservable();
   postsById :any;
 
+  private commentByIdSubject =new BehaviorSubject<any[]>([]);
+  commentById$ = this.commentByIdSubject.asObservable();
+  commentById :any;
+
   
   baseUrl: string = 'https://localhost:7166/api/Profile/';
 
@@ -76,7 +80,7 @@ export class ProfileService {
 }
 
 
-Addpost(item:any) : Observable<any>{
+Addpost(item:any) {
   const connectedUserJson = localStorage.getItem('ConnectedUser');
   var id ;
   if (connectedUserJson) {
@@ -85,7 +89,12 @@ Addpost(item:any) : Observable<any>{
   }
   console.log('id',id)
   console.log('item',item)
-  return this.http.post<any>(`https://localhost:7166/api/Post/AddPost?UserId=${id}`,item);
+  this.http.post<any>(`https://localhost:7166/api/Post/AddPost?UserId=${id}`,item).subscribe(data=>{
+    this.getPostById()
+ },
+error=>{
+ console.log("error")
+})
 }
 
 
@@ -98,6 +107,57 @@ error=>{
   console.log("error")
 })
 
+}
+
+AddReact(type:string,postId:string) {
+  const connectedUserJson = localStorage.getItem('ConnectedUser');
+  var id ;
+  if (connectedUserJson) {
+    const connectedUser = JSON.parse(connectedUserJson);
+    id = connectedUser.id;
+  }
+  const item ={ reactionType :type,postId:postId, userId:id}
+  this.http.post<any>("https://localhost:7166/api/Post/AddReaction",item).subscribe(data=>{
+     this.getPostById()
+    
+  },
+error=>{
+  console.log("error")
+})
+
+}
+
+AddComment(postId:string, comment:any) {
+  const connectedUserJson = localStorage.getItem('ConnectedUser');
+  var id ;
+  if (connectedUserJson) {
+    const connectedUser = JSON.parse(connectedUserJson);
+    id = connectedUser.id;
+  }
+  this.http.post<any>(`https://localhost:7166/api/Post/AddComment?UserId=${id}&PostId=${postId}`,comment).subscribe(data=>{
+    this.getCommentsById(postId)
+    this.getPostById()
+   console.log("aded")
+    
+  },
+error=>{
+  console.log("error", error)
+})
+
+}
+
+getCommentsById(postid:string): void {
+  
+   this.http.get<any[]>(`https://localhost:7166/api/Post/GetAllCommentsById?PostId=${postid}`).subscribe(
+      (comment) => {
+       
+        this.commentByIdSubject.next(comment);
+      },
+      (error) => {
+        console.error('Erreur lors de la récupération des commentaires', error);
+      }
+    );
+ 
 }
 
 }

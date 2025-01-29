@@ -1,6 +1,8 @@
 ﻿using chatApp.CORE.Dtos;
 using chatApp.CORE.interfaces;
 using chatApp.CORE.Models;
+using chatApp.EF.Migrations;
+using Microsoft.EntityFrameworkCore;
 
 namespace chatApp.EF.Repositories
 {
@@ -42,8 +44,32 @@ namespace chatApp.EF.Repositories
         {
             if (UserId != null)
             {
-                var posts = _context.Posts.Where(p => p.UserId == Guid.Parse(UserId)).ToList();
+                var posts = _context.Posts.Where(p => p.UserId == Guid.Parse(UserId)).Include(p=>p.Reactions).Include(p=>p.Comments).ToList();
                 return posts;
+            }
+            return null;
+        }
+
+        public async Task<string> AddComment(string UserId,string PostId, CommentDto comment)
+        {
+            if(UserId != null && PostId !=null) 
+            {
+                var commentToAdd = new Comment { description =comment.description, PostId = Guid.Parse(PostId), UserId= Guid.Parse(UserId) };
+                _context.Comments.Add(commentToAdd);
+                return "Comment Added";
+            }
+            else
+            {
+                return "UserId is null or PostId is null";
+            }
+        }
+
+        public IEnumerable<Comment> GetAllCommentsById(string PostId)
+        {
+            if (PostId != null)
+            {
+                var comments = _context.Comments.Where(p => p.PostId == Guid.Parse(PostId)).ToList();
+                return comments;
             }
             return null;
         }

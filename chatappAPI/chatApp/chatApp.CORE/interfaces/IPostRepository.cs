@@ -8,5 +8,7 @@ namespace chatApp.CORE.interfaces
 
         Task<string> AddPost(string UserId,PostDto post);
         IEnumerable<Post> GetAllPostsById(string UserId);
+        Task<string> AddComment(string UserId, string PostId, CommentDto comment);
+        IEnumerable<Comment> GetAllCommentsById(string PostId);
     }
 }

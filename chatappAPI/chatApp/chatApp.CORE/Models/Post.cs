@@ -14,7 +14,8 @@ namespace chatApp.CORE.Models
         public string privacy { get; set; }
         public DateTime publicationDate { get; set; }
         public Guid UserId { get; set; }
-
+        public ICollection<Reaction> Reactions { get; set;}
+        public ICollection<Comment> Comments { get; set;}
        
     }
 }

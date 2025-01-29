@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { DialogCommentRoutingModule } from './dialog-comment-routing.module';
 import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 
 
 @NgModule({
@@ -10,7 +11,8 @@ import { MatButtonModule } from '@angular/material/button';
   imports: [
     CommonModule,
     DialogCommentRoutingModule,
-    MatButtonModule
+    MatButtonModule,
+    MatIconModule
   ]
 })
 export class DialogCommentModule { }

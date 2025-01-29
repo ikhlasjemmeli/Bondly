@@ -22,6 +22,29 @@ namespace chatApp.EF.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("chatApp.CORE.Models.Comment", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("PostId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PostId");
+
+                    b.ToTable("Comments");
+                });
+
             modelBuilder.Entity("chatApp.CORE.Models.Post", b =>
                 {
                     b.Property<Guid>("Id")
@@ -86,6 +109,77 @@ namespace chatApp.EF.Migrations
                     b.ToTable("Profiles");
                 });
 
+            modelBuilder.Entity("chatApp.CORE.Models.Reaction", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("Number")
+                        .HasColumnType("int");
+
+                    b.Property<Guid>("PostId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("ReactionTypeId")
+                        .HasColumnType("int");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PostId");
+
+                    b.HasIndex("ReactionTypeId");
+
+                    b.ToTable("Reactions");
+                });
+
+            modelBuilder.Entity("chatApp.CORE.Models.ReactionType", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Type")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ReactionType");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Type = "like"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Type = "love"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Type = "haha"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Type = "clap"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Type = "smile"
+                        });
+                });
+
             modelBuilder.Entity("chatApp.CORE.Models.User", b =>
                 {
                     b.Property<Guid>("Id")
@@ -116,6 +210,15 @@ namespace chatApp.EF.Migrations
                     b.ToTable("Users");
                 });
 
+            modelBuilder.Entity("chatApp.CORE.Models.Comment", b =>
+                {
+                    b.HasOne("chatApp.CORE.Models.Post", null)
+                        .WithMany("Comments")
+                        .HasForeignKey("PostId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("chatApp.CORE.Models.Post", b =>
                 {
                     b.HasOne("chatApp.CORE.Models.User", null)
@@ -132,6 +235,30 @@ namespace chatApp.EF.Migrations
                         .HasForeignKey("chatApp.CORE.Models.Profile", "UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("chatApp.CORE.Models.Reaction", b =>
+                {
+                    b.HasOne("chatApp.CORE.Models.Post", null)
+                        .WithMany("Reactions")
+                        .HasForeignKey("PostId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("chatApp.CORE.Models.ReactionType", "ReactionType")
+                        .WithMany()
+                        .HasForeignKey("ReactionTypeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ReactionType");
+                });
+
+            modelBuilder.Entity("chatApp.CORE.Models.Post", b =>
+                {
+                    b.Navigation("Comments");
+
+                    b.Navigation("Reactions");
                 });
 
             modelBuilder.Entity("chatApp.CORE.Models.User", b =>

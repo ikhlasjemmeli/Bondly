@@ -1,5 +1,6 @@
 ﻿using chatApp.CORE.Dtos;
 using chatApp.CORE.interfaces;
+using chatApp.CORE.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -35,6 +36,18 @@ namespace chatApp.Api.Controllers
                 publicationDate = post.publicationDate,
                 UserFirstName= _unitOfWork.Users.GetById(post.UserId).FirstName,
                 UserLastName = _unitOfWork.Users.GetById(post.UserId).LastName,
+                React = post.Reactions.Select(reaction => new
+                {
+                    id = reaction.Id,
+                    number = reaction.Number,
+                    reactionTypeId = reaction.ReactionTypeId,
+                    postId =reaction.PostId,
+                    userId = reaction.UserId,
+                    UserFirstName = _unitOfWork.Users.GetById(reaction.UserId).FirstName ?? "",
+                    UserLastName = _unitOfWork.Users.GetById(reaction.UserId).LastName ?? "",
+                    
+                }).ToList(),
+                Comments = post.Comments,
              }).OrderByDescending(post=>post.publicationDate);
             return Ok(postDto);
         }
@@ -53,6 +66,45 @@ namespace chatApp.Api.Controllers
             _unitOfWork.Posts.Delete(Guid.Parse(postId));
             _unitOfWork.complete();
             return Ok();
+        }
+
+        [HttpPost("AddReaction")]
+        public IActionResult AddReaction(ReactionDto reaction)
+        {
+           var react= _unitOfWork.Reactions.AddReaction(reaction);
+            _unitOfWork.complete();
+            return Ok(react);
+        }
+
+        [HttpPost("AddComment")]
+        public async Task<ActionResult> AddComment(string UserId, string PostId, CommentDto comment)
+        {
+            var commentToAdd =await _unitOfWork.Posts.AddComment(UserId,PostId,comment);
+            _unitOfWork.complete();
+            if(commentToAdd == "Comment Added")
+            {
+                return Ok(new { message = commentToAdd }); 
+            }
+            else
+            {
+                return BadRequest(new { message = commentToAdd }); 
+            }
+           
+        }
+
+        [HttpGet("GetAllCommentsById")]
+        public IActionResult GetAllCommentsById(string PostId)
+        {
+            var comments = _unitOfWork.Posts.GetAllCommentsById(PostId);
+            var commentsDto = comments.Select(comment => new
+            {
+                id = comment.Id,
+                description = comment.description,
+                UserFirstName = _unitOfWork.Users.GetById(comment.UserId).FirstName,
+                UserLastName = _unitOfWork.Users.GetById(comment.UserId).LastName,
+
+            }); //.OrderByDescending(post => post.publicationDate);
+            return Ok(commentsDto);
         }
     }
 }
