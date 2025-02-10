@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { ProfileService } from 'src/app/Services/ProfileService/profile.service';
 
@@ -10,13 +11,15 @@ import { ProfileService } from 'src/app/Services/ProfileService/profile.service'
 export class StatisticsComponent implements OnInit{
   ProfileByIdSubscription : Subscription |undefined;
  
-constructor(private profileService:ProfileService){
+constructor(private profileService:ProfileService, private router :Router){
 
 }
 profileById= this.profileService.profileById
   ngOnInit(): void {
     this.ProfileByIdSubscription = this.profileService.profileById$.subscribe( p=>{
      this.profileById=p
+
+     console.log('stat',this.profileById)
     
     });
     this.profileService.getProfileById()
@@ -28,6 +31,16 @@ profileById= this.profileService.profileById
     return newDate;
   }
 
+  navigateToReceived(){
+    this.router.navigate(['/home/Received invitations']);
+  }
+  navigateToSent(){
+    this.router.navigate(['/home/Sent invitations']);
+  }
+
+  navigateToBlocked(){
+    this.router.navigate(['/home/Blocked users']);
+  }
 
 
 }

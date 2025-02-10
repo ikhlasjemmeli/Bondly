@@ -1,6 +1,6 @@
 
-
-<div class="row text-left" >
+<h2>Stay in touch with your friends</h2>
+<div class="row text-left" *ngFor="let friend of Friends" (click)="navigateToProfile(friend.id)" style="cursor: pointer;">
     <div class="col-4 text-center">
         <div class="d-flex justify-content-center m-2">
             <div class="rounded-circle" style="width: 50px; height: 50px; overflow: hidden; background-color: #f0f0f0;">
@@ -8,8 +8,8 @@
             </div>
           </div>
     </div>
-    <div class="col-8   mt-4">
-        sdlkf LJHJHLJH  
+    <div class="col-8  fs-3 mt-4">
+        {{friend.firstName}} {{friend.lastName}}  
     </div>
     <mat-divider></mat-divider>
 </div>

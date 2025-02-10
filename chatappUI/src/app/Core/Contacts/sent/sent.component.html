@@ -1,0 +1,44 @@
+
+
+
+  <div class="container-fluid bg-body-secondary text-center" style="padding-top: 5%; height: 100vh;">
+    <div class="row justify-content-center p-4 m-4">
+      <h1 class="fw-bold" *ngIf="user.sentRequests.length ===0">Oops! No invitations have been sent yet.</h1>
+      <div class="col-md-3 mb-4 text-center" *ngFor="let sent of user.sentRequests">
+        <div class="text-center card position-relative" 
+             style="border-radius: 10px; width: 95%; height: 400px; box-shadow: 5px 5px 20px 0 rgb(73, 70, 70); overflow: hidden;">
+        
+          <div class="d-flex justify-content-center mt-3">
+            <div class="rounded-circle mt-2" 
+                 style="width: 100px; height: 100px; overflow: hidden; background-color: #f0f0f0;">
+              <img src="https://miro.medium.com/v2/resize:fit:2400/2*Ip34iu-upqis6XbBVK3ARA.jpeg" 
+                   alt="" class="img-fluid" style="width: 100%; height: 100%; object-fit: cover;">
+            </div>
+          </div>
+          
+          <h2>{{ sent.receiver }} </h2>
+          <small class="px-4 fs-4">You’ve just sent a friendship invitation to {{ sent.receiver }}! 🎉 Let’s hope for a great connection and many amazing moments ahead! 🚀</small>
+          
+          <div class="border border-1 border-secondary mx-5 my-1"></div>
+          
+          <div class="example-button-container mt-4">
+            <button mat-fab extended class="view-profile-btn" (click)="ViewProfile(sent.receiverId)">
+              <mat-icon>person</mat-icon>
+              View profile
+            </button>
+          </div>
+          
+       
+          
+          <div class="example-button-container mt-4">
+            <button mat-fab extended class="decline-btn" (click)="Decline(sent.receiverId)">
+              <mat-icon>cancel</mat-icon>
+              Decline invitation
+            </button>
+          </div>
+        
+        </div>
+      </div>
+    </div>
+  </div>
+  

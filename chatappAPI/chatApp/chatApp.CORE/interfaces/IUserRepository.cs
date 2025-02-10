@@ -15,6 +15,8 @@ namespace chatApp.CORE.interfaces
        Task<string> Authenticate(LoginDto user);
         User getUserInformationFormJwtToken(string token);
         Task<string> updatePassword(string userId, PasswordDto passwordDto);
+        IEnumerable<User> GetAllUsers();
+        IEnumerable<User> GetAllContacts(string userId);
 
 
 

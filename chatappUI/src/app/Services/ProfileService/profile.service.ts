@@ -10,9 +10,17 @@ export class ProfileService {
   profileById$ = this.profileByIdSubject.asObservable();
   profileById:any;
 
+  private UserprofileByIdSubject = new BehaviorSubject<any[]>([]);
+  UserprofileById$ = this.UserprofileByIdSubject.asObservable();
+  UserprofileById:any;
+
   private postByIdSubject = new BehaviorSubject<any[]>([]);
   postById$ = this.postByIdSubject.asObservable();
   postsById :any;
+
+  private UserpostByIdSubject = new BehaviorSubject<any[]>([]);
+  UserpostById$ = this.UserpostByIdSubject.asObservable();
+  UserpostsById :any;
 
   private commentByIdSubject =new BehaviorSubject<any[]>([]);
   commentById$ = this.commentByIdSubject.asObservable();
@@ -43,6 +51,20 @@ export class ProfileService {
     } else {
       console.log("Aucun utilisateur connecté trouvé dans le localStorage.");
     }
+  }
+
+  getProfileUserById(id:string): void {
+    
+      this.http.get<any[]>(`${this.baseUrl}GetProfileById?UserId=${id}`).subscribe(
+        (profile) => {
+          
+          this.UserprofileByIdSubject.next(profile);
+        },
+        (error) => {
+          console.error('Erreur lors de la récupération du profil', error);
+        }
+      );
+   
   }
 
 
@@ -77,6 +99,19 @@ export class ProfileService {
   } else {
     console.log("Aucun utilisateur connecté trouvé dans le localStorage.");
   }
+}
+
+getPostUserById(id:string): void {
+   this.http.get<any[]>(`https://localhost:7166/api/Post/GetAllPostsById?UserId=${id}`).subscribe(
+      (post) => {
+       
+        this.UserpostByIdSubject.next(post);
+      },
+      (error) => {
+        console.error('Erreur lors de la récupération du postes', error);
+      }
+    );
+ 
 }
 
 

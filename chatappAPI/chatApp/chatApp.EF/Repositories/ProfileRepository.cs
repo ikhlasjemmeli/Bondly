@@ -14,7 +14,7 @@ namespace chatApp.EF.Repositories
         }
         public async Task<object> getProfileById(Guid UserId)
         {
-            User user = await _context.Users.FirstOrDefaultAsync(u => u.Id == UserId);
+            User user = await _context.Users.Include(u=>u.Friends).Include(u=>u.BlockedUsers).Include(u=>u.SentRequests).Include(u => u.ReceivedRequests).FirstOrDefaultAsync(u => u.Id == UserId);
             var Profile = _context.Profiles.FirstOrDefault(u => u.UserId == UserId);
             var Posts = _context.Posts.Where(u => u.UserId == UserId);
             var ProfileDto = new
@@ -29,8 +29,25 @@ namespace chatApp.EF.Repositories
                 LastName = user.LastName,
                 Email = user.Email,
                 DateOfBirth = user.DateOfBirth,
-                Posts = Posts.Count()
+                Posts = Posts.Count(),
+                Friends= user.Friends.Count(),
+                BlockedUsers = user.BlockedUsers.Count(),
+                sentRequests = user.SentRequests.Select(sent =>new
+                {
+                    senderId=sent.SenderId,
+                    receiverId=sent.ReceiverId,
+                    date=DateTime.Now - sent.SentAt,
+                    receiver = $"{_context.Users.FirstOrDefault(u=>u.Id == sent.ReceiverId).FirstName} {_context.Users.FirstOrDefault(u => u.Id == sent.ReceiverId).LastName}" 
+                
+                }).ToList(),
+                receivedRequests =user.ReceivedRequests.Select(sent => new
+                {
+                    senderId = sent.SenderId,
+                    receiverId = sent.ReceiverId,
+                    date = DateTime.Now - sent.SentAt,
+                    sender = $"{_context.Users.FirstOrDefault(u => u.Id == sent.SenderId).FirstName} {_context.Users.FirstOrDefault(u => u.Id == sent.SenderId).LastName}"
 
+                }).ToList(),
             };
             return ProfileDto;
         }

@@ -28,27 +28,28 @@ namespace chatApp.Api.Controllers
         public IActionResult GetAllPostsById(string UserId)
         {
             var Posts = _unitOfWork.Posts.GetAllPostsById(UserId);
-            var postDto = Posts.Select( post => new {
-                id =post.Id,
+            var postDto = Posts.Select(post => new {
+                id = post.Id,
                 description = post.description,
-                postPath= post.postPath,
+                postPath = post.postPath,
                 privacy = post.privacy,
                 publicationDate = post.publicationDate,
-                UserFirstName= _unitOfWork.Users.GetById(post.UserId).FirstName,
+                userId = post.UserId,
+                UserFirstName = _unitOfWork.Users.GetById(post.UserId).FirstName,
                 UserLastName = _unitOfWork.Users.GetById(post.UserId).LastName,
                 React = post.Reactions.Select(reaction => new
                 {
                     id = reaction.Id,
                     number = reaction.Number,
                     reactionTypeId = reaction.ReactionTypeId,
-                    postId =reaction.PostId,
+                    postId = reaction.PostId,
                     userId = reaction.UserId,
                     UserFirstName = _unitOfWork.Users.GetById(reaction.UserId).FirstName ?? "",
                     UserLastName = _unitOfWork.Users.GetById(reaction.UserId).LastName ?? "",
-                    
+
                 }).ToList(),
                 Comments = post.Comments,
-             }).OrderByDescending(post=>post.publicationDate);
+            }).OrderByDescending(post=>post.publicationDate);
             return Ok(postDto);
         }
 

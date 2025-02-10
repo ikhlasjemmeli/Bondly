@@ -3,6 +3,7 @@ using chatApp.CORE.interfaces;
 using chatApp.CORE.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using System.Collections.Immutable;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
@@ -14,6 +15,10 @@ namespace chatApp.EF.Repositories
         public UserRepository(ApplicationContext _context) : base(_context)
         {
 
+        }
+        public IEnumerable<User> GetAllUsers()
+        {
+            return _context.Users.Include(p=>p.Profile).Include(p=>p.Friends).Include(p=>p.ReceivedRequests).Include(p=>p.SentRequests).ToList();
         }
         public User GetUserByEmail(string email)
         {
@@ -150,5 +155,14 @@ namespace chatApp.EF.Repositories
                 return "userId is null";
             }
         } 
+
+        public IEnumerable<User> GetAllContacts(string userId)
+        {
+            var user = _context.Users.Include(u=>u.Friends).Include(u=>u.BlockedUsers).FirstOrDefault(u=>u.Id ==Guid.Parse(userId));
+            var Friends = user.Friends;
+            var Blocked = user.BlockedUsers;
+            var users = _context.Users.Include(p => p.Profile).Include(p => p.Friends).Include(p => p.ReceivedRequests).Include(p => p.SentRequests).ToArray();
+            return users.Except(Friends).Except(Blocked).Where(u=>u.Id !=user.Id).ToArray();
+        }
     }
 }

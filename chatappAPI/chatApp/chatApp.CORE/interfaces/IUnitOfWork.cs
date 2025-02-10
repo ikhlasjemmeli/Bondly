@@ -12,6 +12,7 @@ namespace chatApp.CORE.interfaces
         IProfileRepository Profiles { get; }
         IPostRepository Posts { get; }
         IReactionRepository Reactions { get; }
+        IFriendRequestRepository FriendRequests { get; }
         int complete();
     }
 }

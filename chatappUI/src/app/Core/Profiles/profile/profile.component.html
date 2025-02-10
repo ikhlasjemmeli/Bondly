@@ -113,6 +113,6 @@
 
 
 <div class="row m-1 mt-4 rounded bg-body-secondary">
-        <app-about *ngIf="currentView ==='about'"></app-about>
+        <app-about *ngIf="currentView ==='about'"  [ProfileById]="ProfileById"></app-about>
         <app-posts *ngIf="currentView==='posts'"   [postsbyId]="postsbyId"></app-posts>
 </div>

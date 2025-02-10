@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent {
   loginForm!:FormGroup;
-
+  readonly dialog = inject(MatDialog);
 constructor(private formbuilder : FormBuilder, private authservice :AuthServiceService, private toastr:ToastrService, private router:Router){
 this.loginForm= this.formbuilder.group({
   email:['',[Validators.required, Validators.email]],
@@ -20,39 +20,33 @@ this.loginForm= this.formbuilder.group({
 })
 }
 
-Login(){
-   if(this.loginForm.value !=null){
-    this.authservice.Login(this.loginForm.value).subscribe(
-      data=>{
-        if(data.token && data.connectedUser){
-           localStorage.clear()
-          localStorage.setItem('Token',data.token)
-          localStorage.setItem('ConnectedUser',JSON.stringify(data.connectedUser))
-          this.toastr.success('Login successful!', 'Success')
-          this.router.navigate(['/home/dashboard']);
-        }
-        
-        
-      },
-      error=>{
-        this.toastr.error(error.error.message,'Error');
+Login(): void {
+  if (!this.loginForm.valid) {
+    this.toastr.error('Please fill in the form correctly. ', 'Erreur');
+    return;
+  }
+
+  this.authservice.Login(this.loginForm.value).subscribe({
+    next: (data) => {
+      if (data.token && data.connectedUser) {
+        localStorage.clear();
+        localStorage.setItem('Token', data.token);
+        localStorage.setItem('ConnectedUser', JSON.stringify(data.connectedUser));
+        this.toastr.success('Successful connection!', 'Succès');
+        this.router.navigate(['/home/dashboard']);
       }
-    )
-    
-   }
-   else{
-    console.log('error');
-   }
+    },
+    error: (error) => {
+      this.toastr.error(error?.error?.message || 'An error has occurred.', 'Erreur');
+    }
+  });
 }
 
-readonly dialog = inject(MatDialog);
+
+
 
 openDialog() {
-  const dialogRef = this.dialog.open(ForgetPasswordDialogComponent);
-
-  dialogRef.afterClosed().subscribe(result => {
-    console.log(`Dialog result: ${result}`);
-  });
+  this.dialog.open(ForgetPasswordDialogComponent).afterClosed().subscribe();
 }
 
 }

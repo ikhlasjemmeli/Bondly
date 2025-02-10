@@ -38,6 +38,16 @@ import { EditprofileComponent } from './Core/Profiles/editprofile/editprofile.co
 import { MatSelectModule } from '@angular/material/select';
 import { DeleteAccountComponent } from './Core/Profiles/delete-account-post/delete-account.component';
 import { EditpasswordComponent } from './Core/Profiles/editpassword/editpassword.component';
+import { ContactsComponent } from './Core/Contacts/contacts/contacts.component';
+import { ContactsModule } from './Core/Contacts/contacts/contacts.module';
+import { UserProfileComponent } from './Core/Contacts/user-profile/user-profile.component';
+import { UserProfileModule } from './Core/Contacts/user-profile/user-profile.module';
+import { SentComponent } from './Core/Contacts/sent/sent.component';
+import { ReceivedComponent } from './Core/Contacts/received/received.component';
+import { SentModule } from './Core/Contacts/sent/sent.module';
+import { ReceivedModule } from './Core/Contacts/received/received.module';
+import { BlockedComponent } from './Core/Contacts/blocked/blocked.component';
+import { BlockedModule } from './Core/Contacts/blocked/blocked.module';
 
 
 @NgModule({
@@ -49,6 +59,10 @@ import { EditpasswordComponent } from './Core/Profiles/editpassword/editpassword
     EditprofileComponent,
     DeleteAccountComponent,
     EditpasswordComponent,
+    //BlockedComponent,
+   
+   // UserProfileComponent,
+  //  ContactsComponent,
   
     //ProfileComponent,
     //HomeComponent,
@@ -82,6 +96,11 @@ import { EditpasswordComponent } from './Core/Profiles/editpassword/editpassword
      AboutModule,
      MatSelectModule,
      MatOptionModule,
+     ContactsModule,
+     UserProfileModule,
+     SentModule,
+     ReceivedModule,
+     BlockedModule,
     //StatisticsModule,
     ToastrModule.forRoot({ // Configuration globale
       timeOut: 3000, // Durée par défaut des toasts (ms)

@@ -13,6 +13,26 @@ namespace chatApp.CORE.Models
         public string Password { get; set; }
         public Profile Profile { get; set; }
         public ICollection<Post> Posts { get; set; }
+        [JsonIgnore]
+        public ICollection<User> Friends { get; set; } = new List<User>();
+
+        public List<FriendRequest> SentRequests { get; set; }
+        
+        public List<FriendRequest> ReceivedRequests { get; set; }
+
+        [JsonIgnore]
+        public ICollection<User> BlockedUsers { get; set; } = new List<User>();
+
+        public User()
+        {
+            
+            Friends = new List<User>();
+            SentRequests = new List<FriendRequest>();
+            ReceivedRequests = new List<FriendRequest>();
+            BlockedUsers = new List<User>();
+
+
+        }
 
     }
 }

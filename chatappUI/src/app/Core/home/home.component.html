@@ -5,19 +5,21 @@
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0 fs-3">
+     
+          <img src="../../../assets/logo_bondly.png" alt="" style="width:100px; height: 50px;">
+       
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0 fs-3 text-center ml-4">
+        
           <li class="nav-item">
-            <img src="../../../assets/logo_bondly.png" alt="" style="width:100px; height: 50px;">
+            <a class="nav-link  fs-2 fw-bold" aria-current="page" [routerLink]="['/home/dashboard']">Home</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" [routerLink]="['/home/dashboard']">Home</a>
-          </li>
-          <li class="nav-item">
+          <li class="nav-item fs-2 fw-bold">
             <a class="nav-link" [routerLink]="['/home/profile']">Profile</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Contacts</a>
+          <li class="nav-item fs-2 fw-bold">
+            <a class="nav-link" [routerLink]="['/home/contacts']">Contacts</a>
           </li>
+        
          
         
         </ul>

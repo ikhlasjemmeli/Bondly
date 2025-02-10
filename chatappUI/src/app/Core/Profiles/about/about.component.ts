@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { ProfileService } from 'src/app/Services/ProfileService/profile.service';
 
@@ -8,20 +8,17 @@ import { ProfileService } from 'src/app/Services/ProfileService/profile.service'
   styleUrls: ['./about.component.scss']
 })
 export class AboutComponent {
+   @Input() ProfileById: any;
   ProfileByIdSubscription : Subscription |undefined;
 
 
   constructor(private profileService :ProfileService){}
 
-  ProfileById =this.profileService.profileById;
+ 
 
 
   ngOnInit(): void {
-    this.ProfileByIdSubscription =this.profileService.profileById$.subscribe(p=>{
-      this.ProfileById = p
-      console.log(p)
-    });
-    this.profileService.getProfileById()
+   
   }
  
 

@@ -15,8 +15,10 @@ import { ToastrService } from 'ngx-toastr';
 })
 
 export class SignupComponent {
+
   emailFormControl = new FormControl('', [Validators.required, Validators.email]);
   SignUpForm!: FormGroup;
+
   constructor(private formbuilder:FormBuilder, private authService : AuthServiceService, private toastr: ToastrService){
     this.SignUpForm = this.formbuilder.group({
         firstName:['',Validators.required],
@@ -37,24 +39,14 @@ export class SignupComponent {
       return password === confirmPassword;
     }
 
-    showSuccess() {
-      this.toastr.success('Hello world!', 'Toastr fun!');
-    }
-    showError() {
-      this.toastr.error('Hello world!', 'Toastr fun!');
-    }
+    
 
     SignUp()
     {
-      if(this.SignUpForm.value !=null){
-        this.authService.SignUp(this.SignUpForm.value);
-    
+      if (!this.SignUpForm.valid) {
+        return;
       }
-      else{
-         console.log('error');
-      }
-      
-        
+      this.authService.SignUp(this.SignUpForm.value);
     }
   
 }

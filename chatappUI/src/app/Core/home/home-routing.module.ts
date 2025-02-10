@@ -18,6 +18,31 @@ const routes: Routes = [
         path: 'profile',
         loadChildren: () => import('../Profiles/profile/profile.module').then(m=>m.ProfileModule),
         
+      },
+      {
+        path: 'contacts',
+        loadChildren: () => import('../Contacts/contacts/contacts.module').then(m=>m.ContactsModule),
+        
+      },
+      {
+        path: 'UserProfile/:id',
+        loadChildren: () => import('../Contacts/user-profile/user-profile.module').then(m=>m.UserProfileModule),
+        
+      },
+      {
+        path: 'Sent invitations',
+        loadChildren: () => import('../Contacts/sent/sent.module').then(m=>m.SentModule),
+        
+      },
+      {
+        path: 'Received invitations',
+        loadChildren: () => import('../Contacts/received/received.module').then(m=>m.ReceivedModule),
+        
+      }
+      , {
+        path: 'Blocked users',
+        loadChildren: () => import('../Contacts/blocked/blocked.module').then(m=>m.BlockedModule),
+        
       }
     ]}
 ];

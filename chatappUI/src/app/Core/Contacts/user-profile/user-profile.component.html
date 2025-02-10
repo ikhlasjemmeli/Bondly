@@ -1,0 +1,109 @@
+<div class="container text-center justify-content-center"style="padding-left: 15%;  padding-top:69px; position: absolute;"  >
+    <div class="row">
+        
+        <div class="col-2">
+         
+          <div class="camera-cercle">
+            <button  class="icon" type="button">
+             
+              <img 
+                *ngIf="profileImage" 
+                [src]="getProfileImage(profileImage)"
+        
+                alt="Photo de profil" 
+                class="profile-image"
+              />
+            </button>
+          </div>
+        
+         
+            <h3 class="text-center fw-bold">{{UserProfileById.firstName}} <br> {{UserProfileById.lastName}}</h3>
+        </div>
+        <div class="col-10 ">
+         
+              <div class="cover-div">
+                <button  class="cover" type="button" >
+                 
+                  <img 
+                    *ngIf="coverImage" 
+                    [src]="getProfileImage(coverImage)"
+            
+                    alt="Photo de couverture" 
+                    class="cover-image"
+                  />
+                </button>
+              </div>
+            
+              
+        </div>
+       
+      </div>
+
+
+      <div class="row bg-body-secondary rounded  m-1">
+       <div class="col-1 m-2">
+        <div class="example-button-container">
+          <button mat-fab extended class="bg-body-secondary" (click)="SetView('about')"  [disabled]="!block || friendRequestStatus=='Blocked'">
+            
+            About
+          </button>
+        </div>
+       </div>
+
+       <div class="col-1 m-2">
+        <div class="example-button-container">
+          <button mat-fab extended class="bg-body-secondary" (click)="SetView('posts')"  [disabled]="!block || friendRequestStatus=='Blocked'">
+            
+            Posts
+          </button>
+        </div>
+       </div>
+
+       <div class="col-3  m-2 ">
+        <div class="example-button-container">
+          <button mat-fab extended class="bg-body-secondary" [disabled]="!mute || friendRequestStatus=='Blocked'" >
+           <i class="bi bi-chat-dots fs-2 text-danger fw-bold"></i>
+           Shoot a DM
+          </button>
+        </div>
+       </div>
+       <div class="col-4 m-2 ms-5 position-relative">
+        <div class="example-button-container position-absolute top-0 end-0">
+          <button mat-fab extended class="text-white bg-primary" [disabled]="!block || friendRequestStatus=='Friend' || friendRequestStatus=='Blocked'" (click)="AddFriendRequest()">
+            <i class="bi bi-person-plus fs-2 text-white"></i>
+            {{ friendRequestStatus }}
+          </button>
+        </div>
+       </div>
+
+
+       <div class="col-1 position-relative m-2 ms-4">
+        <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+          <mat-icon>more_vert</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu" xPosition="after">
+          <button mat-menu-item (click)="Block()">
+            <mat-icon>warning</mat-icon>
+            <span>{{blockText}}</span>
+          </button>
+          <button mat-menu-item (click)="Mute()">
+            <mat-icon>lock</mat-icon>
+            <span>{{this.muteText}}</span>
+          </button>
+
+          <button mat-menu-item (click)="unfriend()" [disabled]="friendRequestStatus!='Friend'">
+            <mat-icon>person_remove</mat-icon>
+            Unfriend
+          </button>
+          
+         
+        </mat-menu>
+       </div>
+      </div>
+
+
+
+<div class="row m-1 mt-4 rounded bg-body-secondary">
+        <app-about *ngIf="currentView ==='about'"  [ProfileById]="UserProfileById"></app-about>
+        <app-posts *ngIf="currentView==='posts'"   [postsbyId]="UserpostsbyId"></app-posts>
+</div>

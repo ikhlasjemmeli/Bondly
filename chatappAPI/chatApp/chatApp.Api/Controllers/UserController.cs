@@ -18,7 +18,8 @@ namespace chatApp.Api.Controllers
         [HttpGet("GetAllUsers")]
         public IActionResult GetAllUsers()
         {
-            var Users = _unitOfWork.Users.GetAll();
+            var Users = _unitOfWork.Users.GetAllUsers();
+            
             return Ok(Users);
         }
 
@@ -80,6 +81,21 @@ namespace chatApp.Api.Controllers
             }
 
             return BadRequest(new { message = passwordToUpdate }); 
+        }
+
+        [HttpDelete("deleteUser")]
+        public IActionResult DeleteUser(string userId)
+        {
+            _unitOfWork.Users.Delete(Guid.Parse(userId));
+            _unitOfWork.complete();
+            return Ok();
+        }
+
+
+        [HttpGet("GetAllContacts")]
+        public IActionResult GetAllContacts(string userId)
+        {
+            return Ok(_unitOfWork.Users.GetAllContacts(userId));
         }
 
 

@@ -1,15 +1,15 @@
-<div class="container  " >
+<div class="container  login-container" >
     <div class="row" style=" border-radius: 10px; box-shadow: 0px 0px 50px 20px rgb(190, 190, 190); height: 90vh; margin-top: 5vh;">
      
-        <div class="col-md-6" style=" margin-top: 2vh;">
-            <div >
-                <img src="../../../assets/signup.png" alt="">
-            </div>
+        <div class="col-md-6 d-none d-lg-block illustration-section " style=" margin-top: 2vh;">
+           
+                <img src="../../../assets/signup.png" alt="Login Illustration">
+           
         </div>
        
         <div class="col-md-6 text-center">
             <div class="  text-center  " >
-                <h1 class="text-center" style="font-weight: bold;  margin-left: -90px;">Sign up</h1>
+                <h1 class="text-center" style="font-weight: bold;  margin-left: -90px;" class="title">Sign up</h1>
                 <form class="example-form" [formGroup]="SignUpForm" >
                     <mat-form-field class="example-full-width">
                       <mat-label>FirstName</mat-label>
@@ -41,15 +41,15 @@
                         <input type="password" matInput placeholder="" formControlName="confirmPassword" required>
                       </mat-form-field>
                       
-                      <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" formControlName="acceptCondition" required>
-                        <small class="form-check-label" for="flexCheckDefault">
+                      <div class="form-check mx-5 px-4">
+                        <input class="form-check-input border border-2 border-black" type="checkbox" value="" id="flexCheckDefault" formControlName="acceptCondition" required>
+                      
                             I agree to create an account and register on this platform.
-                        </small>
+                        
                       </div>
                       <div class="example-flex-container "style="margin-top:5px;">
                         <div class="example-button-container">
-                          <button  style="background-color: rgb(34, 53, 224); color: white;" mat-fab extended [disabled]="!SignUpForm.valid || !ConfirmPassword() " (click)="SignUp()">
+                          <button class="login-btn" style="background-color: rgb(34, 53, 224); color: white;" mat-fab extended [disabled]="!SignUpForm.valid || !ConfirmPassword() " (click)="SignUp()">
                             
                             CREATE ACCOUNT
                           </button>
@@ -58,7 +58,7 @@
                   
                    
                   </form>
-                  <h4 style="margin-top:10px; margin-left: -130px;">Already have an account ? <a style="cursor: pointer;" [routerLink]="['/Login']">Sign in</a></h4>
+                  <h4 style="margin-top:10px; margin-left: -130px;">Already have an account ? <a style="cursor: pointer;" [routerLink]="['/Login']" class="signup-text">Sign in</a></h4>
                   
               
             </div>

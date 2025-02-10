@@ -7,17 +7,15 @@
  
 </div>
 <h3 class="fw-bold">{{profileById.firstName}}  {{profileById.lastName}}</h3>
-<small class="fs-5 ">{{ConvertDate(profileById.dateOfBirth )}}</small>
-<small class="fs-5 ">{{profileById.situation}}</small>
-<small class="fs-5 ">{{profileById.study}}</small>
-<small class="fs-5 p-4">{{profileById.bio}}</small>
-</div>
-<div class="row">
 
-<mat-list>
+<small class="fs-5 p-3">{{profileById.bio}}</small>
+</div>
+<div class="row text-left">
+
+<mat-list class="">
     <mat-list-item>
       <mat-icon matListIcon>group</mat-icon>
-      Friends</mat-list-item>
+      Friends : {{profileById.friends}}</mat-list-item>
     <mat-divider></mat-divider>
     <mat-list-item>
       <mat-icon matListIcon>post_add</mat-icon>
@@ -28,6 +26,24 @@
       <mat-icon matListIcon matBadge="15">chat</mat-icon>
       
       Chats</mat-list-item>
+      <mat-divider></mat-divider>
+      <mat-list-item (click)="navigateToSent()" style="cursor: pointer;">
+        <mat-icon matListIcon matBadge="15">outgoing_mail</mat-icon>
+        
+        Sent Invitations :{{profileById.sentRequests.length}}</mat-list-item>
+        <mat-divider></mat-divider>
+        <mat-list-item  (click)="navigateToReceived()" style="cursor: pointer;">
+          
+          <mat-icon matListIcon matBadge="15">mark_email_read</mat-icon>
+          
+          Received Invitations :{{profileById.receivedRequests.length}}</mat-list-item>
+          <mat-divider></mat-divider>
+          <mat-list-item  (click)="navigateToBlocked()" style="cursor: pointer;">
+          
+            <mat-icon >lock</mat-icon>
+            
+            Blocked
+:{{profileById.blockedUsers}}</mat-list-item>
 
   </mat-list>
 </div>
