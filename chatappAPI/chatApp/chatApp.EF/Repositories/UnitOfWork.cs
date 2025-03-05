@@ -16,6 +16,7 @@ namespace chatApp.EF.Repositories
         public IPostRepository Posts { get; set; }
         public IReactionRepository Reactions { get; set; }
         public IFriendRequestRepository FriendRequests { get; set; }
+        public  IConversationRepository Conversations { get; set; }
         public UnitOfWork(ApplicationContext context)
         {
 
@@ -25,6 +26,7 @@ namespace chatApp.EF.Repositories
             Profiles = new ProfileRepository(_context);
             Reactions = new ReactionRepository(_context);
             FriendRequests = new FriendRequestRepository(_context);
+            Conversations = new ConversationRepository(_context);
 
         }
         public void Dispose()

@@ -1,6 +1,7 @@
 ﻿using chatApp.CORE.Dtos;
 using chatApp.CORE.interfaces;
 using chatApp.CORE.Models;
+using chatApp.EF.Repositories;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -107,5 +108,20 @@ namespace chatApp.Api.Controllers
             }); //.OrderByDescending(post => post.publicationDate);
             return Ok(commentsDto);
         }
+
+
+        [HttpGet("GetFriendsPosts")]
+        public ActionResult<IEnumerable<Post>> GetFriendsPosts(string userId)
+        {
+            var posts = _unitOfWork.Posts.GetFriendsPosts(userId);
+
+            if (posts == null || !posts.Any())
+            {
+                return NotFound("No posts found.");
+            }
+
+            return Ok(posts);
+        }
+
     }
 }

@@ -7,6 +7,9 @@ import { MatIconModule } from '@angular/material/icon';
 import { ChatsComponent } from '../Core/Dashbord/chats/chats.component';
 import { PostsComponent } from '../Core/Dashbord/posts/posts.component';
 import { AboutComponent } from '../Core/Profiles/about/about.component';
+import { ContactComponent } from '../Core/ChatArea/contact/contact.component';
+import { SettingsComponent } from '../Core/ChatArea/settings/settings.component';
+import { MatButtonModule } from '@angular/material/button';
 
 
 
@@ -15,20 +18,25 @@ import { AboutComponent } from '../Core/Profiles/about/about.component';
     StatisticsComponent,
     ChatsComponent,
     PostsComponent,
-    AboutComponent
+    AboutComponent,
+    ContactComponent,
+    SettingsComponent
     
   ],
   imports: [
     CommonModule,
     MatListModule, 
     MatDividerModule,
-    MatIconModule
+    MatIconModule,
+    MatButtonModule
   ],
   exports: [
     StatisticsComponent,
     ChatsComponent,
     PostsComponent,
-    AboutComponent
+    AboutComponent,
+    ContactComponent,
+    SettingsComponent
   ]
 })
 export class SharedmoduleModule { }

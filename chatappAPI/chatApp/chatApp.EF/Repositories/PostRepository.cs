@@ -73,5 +73,33 @@ namespace chatApp.EF.Repositories
             }
             return null;
         }
+
+        public IEnumerable<Post> GetFriendsPosts(string UserId)
+        {
+            if (UserId == null)
+            {
+                return null;
+            }
+
+            var user = _context.Users
+                .Include(u => u.Friends)
+                .FirstOrDefault(u => u.Id == Guid.Parse(UserId));
+
+            if (user == null)
+            {
+                return null;
+            }
+
+            var friendsIds = user.Friends.Select(f => f.Id).ToList();
+
+            var posts = _context.Posts
+                .Where(p => friendsIds.Contains(p.UserId) && (p.privacy == "friend" || p.privacy == "public"))
+                .Include(p => p.Reactions)
+                .Include(p => p.Comments)
+                .OrderBy(x => Guid.NewGuid())
+                .ToList();
+
+            return posts;
+        }
     }
 }

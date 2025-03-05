@@ -1,6 +1,6 @@
 
-<div class="container-fluid bg-body-secondary " style="padding-top: 5%;height: 100vh;">
-  <div class="row text-center justify-content-center p-4 m-4">
+<div class="container-fluid bg-body-secondary sent" >
+  <div class="row text-center justify-content-center p-xxl-4 m-xxl-4 p-sm-1 m-sm-1">
     <div class="col-md-3 mb-4 text-center " *ngFor="let user of Users">
       <div class="text-center card position-relative" 
       (mouseenter)="user.hover = true" 
@@ -22,10 +22,10 @@
    <img src="../../../../assets/logo_bondly.png" style="width:80px; height: 50px;" alt="">
  
    <div *ngIf="user.hover" class=" text-center position-absolute top-50 start-50">
-   <button class="btn btn-primary fs-1  translate-middle" (click)="ViewProfile(user)">
+   <button class="btn btn-primary fs-5  translate-middle" (click)="ViewProfile(user)">
     View Profile
    </button> <br>
-   <button  class="btn btn-primary mt-2 fs-2 translate-middle" (click)="AddFriendRequest(user.id)">
+   <button  class="btn btn-primary mt-2  translate-middle" (click)="AddFriendRequest(user.id)">
     Send Invitation
    </button>
   </div>

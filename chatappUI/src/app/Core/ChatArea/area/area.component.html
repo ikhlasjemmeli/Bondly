@@ -1,0 +1,147 @@
+
+<div class="container-fluid text-center bg-body-secondary   "style="padding-top:63px; height:100vh" >
+
+   
+    <div class="row">
+      <!--Contacts-->
+      
+      <div class="col bg-light m-1 rounded d-lg-none"
+      [ngClass]="{
+        'd-block position-fixed w-100 h-100 bg-white z-5': chat.isContactOpen,
+        'd-none ': !chat.isContactOpen
+      }">
+   <app-contact></app-contact>
+ </div>
+ 
+ <!-- Pour les tailles supérieures à 'lg', l'élément est toujours caché -->
+ <div class="col-3 bg-light m-1 rounded d-none d-lg-block">
+   <app-contact></app-contact>
+ </div>
+      
+
+
+
+       <!-- chats-->
+       <div class="col col-lg-5 col-xl-6 bg-light  m-1 rounded " [ngClass]="{'d-none': chat.isContactOpen}">
+        <div class="h2-container position-relative" style="height: 55px;">
+          <h1>
+            <small  (click)="toggleContacts()" class="start-0 top-0 position-absolute  fs-5 p-2 d-lg-none " style="color: rgb(66, 66, 247); cursor: pointer;"> <mat-icon>message</mat-icon></small>
+            {{Name}}
+            <small (click)="toggleSettings()" class="end-0 top-0 position-absolute  fs-5 p-2 d-lg-none" style="color: rgb(66, 66, 247); cursor: pointer;"> <mat-icon>info</mat-icon></small>
+          </h1> 
+         <small >{{selectedName}} </small>
+      </div>
+      <mat-divider></mat-divider>
+       
+      <div class="position-relative "  style="height: 72vh; overflow-y: auto; overflow-x: hidden; ">
+        <div *ngFor="let message of messages; let i= index" class="message-container"
+             [ngClass]="{'message-me': message.sender === 'me', 'message-friend': message.sender === 'friend', 'emoji-message': message.isEmoji}">
+          
+             <div *ngIf="i === 0 || !isSameDay(messages[i - 1].date, message.date)" class="date-separator">
+              <span>{{ formatDate(message.date) }} </span> 
+            </div>
+
+
+          <div class="message-card-container my-2 ">
+            <mat-card class="message-card p-1   rounded"
+                      [ngStyle]="message.isEmoji ? {'background-color': 'transparent', 'border': 'none', 'box-shadow': 'none', 'margin':'25px'} 
+                                                 : {'background-color': message.sender === 'me' ? selectedColor : 'white'}"
+                      [ngClass]="{'emoji-card': message.isEmoji}"
+                      style="width: 300px; margin-bottom: 5px;">
+              <mat-card-header *ngIf="!message.isEmoji" >
+               
+              </mat-card-header>
+              <mat-card-content  [ngStyle]="message.isEmoji ? {'font-size': '100px', 'text-align': 'center',  } : {}">
+                {{ message.text }}
+              </mat-card-content>
+            </mat-card>
+      <div class="message-time">
+            <!-- Date sous la carte -->
+            <small >{{ formatTimeAgo(message.date) }}</small > <i   *ngIf="message.sender === 'me'" class="fa-solid ms-3 fs-6" [ngClass]="message.view ? ' fa-check-double text-my-green' : ' fa-check'" ></i> 
+          </div>
+        </div>
+        </div>
+      </div>
+      
+      
+      
+      
+      
+      <mat-divider></mat-divider>
+
+     <div class="row p-3">
+      <div class="col-9">
+        <input [(ngModel)]="messageInput" class="fs-4 input-message" type="text" placeholder="Type a message..." name="messageInput" >
+        <i class="bi bi-send fs-2" (click)="AddNewMessage(messageInput,conversationSelected.user2.id,false)" 
+        [style.cursor]="messageInput ? 'pointer' : 'default'" 
+        [ngClass]="{'text-primary': messageInput, 'text-muted': !messageInput}" 
+        [attr.disabled]="!messageInput ? true : null"></i></div>
+      <div class="col-1">
+        
+        <i class="fa-solid fa-camera fs-2"></i>
+        </div>
+        <div class="col-1">
+        
+        <i  (click)="toggleEmojiPicker()" class="fa-solid fa-face-smile fs-2"></i>
+        <div *ngIf="showEmojiPicker" class="emoji-picker-container position-absolute custom-emoji-mart">
+         
+          <emoji-mart  
+            (emojiSelect)="addEmoji($event)"
+            [perLine]="7"
+            [emojiSize]="32"
+           
+            [color]="'#ffcc00'"
+            [darkMode]="true"
+            [showPreview]="false"
+        
+  
+            [enableSearch]="false"
+            [hideRecent]="false"
+          [include]="availableCategories"
+            
+           > 
+          </emoji-mart>
+        </div>
+        
+        
+        </div>
+        <div class="col-1 mt-1">
+         <small class="fs-2 " style="cursor: pointer; " (click)="AddNewMessage(selectedEmoji,conversationSelected.user2.id,true)">{{selectedEmoji}}</small>
+           
+        
+
+      </div>
+     </div>
+
+       </div>
+
+
+
+
+
+
+
+
+
+
+
+       <div class="col bg-light m-1 me-2 rounded d-lg-none"
+       [ngClass]="{
+         'd-block position-fixed w-100 h-100 bg-white z-5': chat.isSettingsOpen,
+         'd-none ': !chat.isSettingsOpen
+       }">
+        <app-settings></app-settings>
+  </div>
+  
+  <!-- Pour les tailles supérieures à 'lg', l'élément est toujours caché -->
+  <div class="col  bg-light m-1 rounded d-none d-lg-block">
+    <app-settings></app-settings>
+  </div>
+
+       <!--Settings
+       <div class="col bg-light  m-1 rounded" [ngClass]="{'d-none': chat.isContactOpen}">
+        <app-settings></app-settings>
+      </div>-->
+    </div>
+</div>
+

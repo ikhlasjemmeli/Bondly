@@ -1,6 +1,6 @@
 
-<div class="container-fluid bg-body-secondary text-center" style="padding-top: 5%; height: 100vh;">
-    <div class="row text-center justify-content-center p-4 m-4">
+<div class="container-fluid bg-body-secondary text-center sent" >
+    <div class="row text-center justify-content-center p-xxl-4 m-xxl-4 p-sm-1 m-sm-1">
       <h1 class="fw-bold" *ngIf="user.receivedRequests.length ===0">No invitations received yet.</h1>
       <div class="col-md-3 mb-4 text-center " *ngFor="let rec of user.receivedRequests">
         <div class="text-center card position-relative" style="border-radius: 10px; width: 95%; height: 400px; box-shadow: 5px 5px 20px 0 rgb(73, 70, 70); overflow: hidden;">

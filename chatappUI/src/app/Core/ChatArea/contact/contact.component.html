@@ -1,0 +1,52 @@
+<div>
+    <div class="p-2">
+       
+         <div class=" bg-light d-flex justify-content-center m-1 rounded ">
+            
+            <i 
+              [ngClass]="{'fa-solid fa-times text-danger': chat.isContactOpen}"  
+              class="fs-3 text-primary m-4 mt-2 d-lg-none position-absolute start-0 top-0 "
+              (click)="toggleContacts()" style="cursor: pointer;">
+            </i>
+            <h1 class="fw-bold">
+            Conversations</h1>
+          </div>
+            
+        <mat-divider></mat-divider>
+    </div>
+    <input class="form-control me-2 fs-5  text-center bg-secondary-subtle" placeholder="Search for people and groups..." >
+    
+    
+    <div class="mt-3" style="height: 70vh; overflow-y: auto; overflow-x: hidden;">
+    <div class="row text-start"  style="cursor: pointer;" *ngFor="let Conversation of Conversations"  (click)="selectConversation(Conversation.user2.id);toggleContacts(); MarkAsView(Conversation.id,Conversation.user2.id)">
+        <div class="col-3 text-center">
+            <div class="d-flex justify-content-center m-2">
+                <div class="rounded-circle" style="width: 50px; height: 50px; overflow: hidden; background-color: #f0f0f0;">
+                  <img src="https://miro.medium.com/v2/resize:fit:2400/2*Ip34iu-upqis6XbBVK3ARA.jpeg" alt="" class="img-fluid" style="width: 100%; height: 100%; object-fit: cover;">
+                </div>
+            </div>
+        </div>
+        <div class="col-9  mt-2 text-start">
+            <div class="h3-container position-relative">
+                <h3 > <small class="fw-bold fs-5">{{Conversation.user2.firstName}} {{Conversation.user2.lastName}} </small> <small class="end-0 top-0 position-absolute  fs-5 ">{{formatTimeAgo(Conversation.lastMessage.date)}}</small></h3> 
+                <small  class="fs-5">{{ Conversation.lastMessage.content.length > 15 ? (Conversation.lastMessage.content | slice:0:15) + '...' : Conversation.lastMessage.content }}  
+                    <span *ngIf="Conversation.messageNotViewed >0" class="badge text-bg-danger rounded-circle d-inline-flex align-items-center justify-content-center"
+                    style="width: 24px; height: 24px;">
+                    {{ Conversation.messageNotViewed > 9 ? '9+' : Conversation.messageNotViewed }}
+                    </span>
+              
+                </small>
+
+            </div>
+         
+        </div>
+        
+        <mat-divider></mat-divider>
+    </div>
+
+
+
+
+</div>
+
+</div>

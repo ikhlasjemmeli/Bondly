@@ -10,6 +10,7 @@ import { AboutComponent } from '../about/about.component';
 import { AboutModule } from '../about/about.module';
 
 import {MatMenuModule} from '@angular/material/menu';
+import { MatDivider } from '@angular/material/divider';
 @NgModule({
   declarations: [
     ProfileComponent,
@@ -21,7 +22,8 @@ import {MatMenuModule} from '@angular/material/menu';
     MatIconModule,
     MatButtonModule,
     SharedmoduleModule,
-    MatMenuModule
+    MatMenuModule,
+    
     
   ]
 })

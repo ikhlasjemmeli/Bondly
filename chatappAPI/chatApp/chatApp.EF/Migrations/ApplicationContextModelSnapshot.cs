@@ -75,6 +75,40 @@ namespace chatApp.EF.Migrations
                     b.ToTable("Comments");
                 });
 
+            modelBuilder.Entity("chatApp.CORE.Models.Conversation", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Color")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Emoji")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("User1Id")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("User2Id")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("User1Id");
+
+                    b.HasIndex("User2Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Conversations");
+                });
+
             modelBuilder.Entity("chatApp.CORE.Models.FriendRequest", b =>
                 {
                     b.Property<int>("Id")
@@ -103,6 +137,45 @@ namespace chatApp.EF.Migrations
                     b.HasIndex("SenderId");
 
                     b.ToTable("FriendRequests");
+                });
+
+            modelBuilder.Entity("chatApp.CORE.Models.Message", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Content")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("ConversationId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool>("IsEmoji")
+                        .HasColumnType("bit");
+
+                    b.Property<Guid>("ReceiverId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("SenderId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("Timestamp")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("View")
+                        .HasColumnType("bit");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ConversationId");
+
+                    b.HasIndex("ReceiverId");
+
+                    b.HasIndex("SenderId");
+
+                    b.ToTable("Messages");
                 });
 
             modelBuilder.Entity("chatApp.CORE.Models.Post", b =>
@@ -309,6 +382,29 @@ namespace chatApp.EF.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("chatApp.CORE.Models.Conversation", b =>
+                {
+                    b.HasOne("chatApp.CORE.Models.User", "User1")
+                        .WithMany()
+                        .HasForeignKey("User1Id")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("chatApp.CORE.Models.User", "User2")
+                        .WithMany()
+                        .HasForeignKey("User2Id")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("chatApp.CORE.Models.User", null)
+                        .WithMany("Conversations")
+                        .HasForeignKey("UserId");
+
+                    b.Navigation("User1");
+
+                    b.Navigation("User2");
+                });
+
             modelBuilder.Entity("chatApp.CORE.Models.FriendRequest", b =>
                 {
                     b.HasOne("chatApp.CORE.Models.User", "Receiver")
@@ -322,6 +418,33 @@ namespace chatApp.EF.Migrations
                         .HasForeignKey("SenderId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
+
+                    b.Navigation("Receiver");
+
+                    b.Navigation("Sender");
+                });
+
+            modelBuilder.Entity("chatApp.CORE.Models.Message", b =>
+                {
+                    b.HasOne("chatApp.CORE.Models.Conversation", "Conversation")
+                        .WithMany("Messages")
+                        .HasForeignKey("ConversationId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("chatApp.CORE.Models.User", "Receiver")
+                        .WithMany()
+                        .HasForeignKey("ReceiverId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("chatApp.CORE.Models.User", "Sender")
+                        .WithMany()
+                        .HasForeignKey("SenderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Conversation");
 
                     b.Navigation("Receiver");
 
@@ -363,6 +486,11 @@ namespace chatApp.EF.Migrations
                     b.Navigation("ReactionType");
                 });
 
+            modelBuilder.Entity("chatApp.CORE.Models.Conversation", b =>
+                {
+                    b.Navigation("Messages");
+                });
+
             modelBuilder.Entity("chatApp.CORE.Models.Post", b =>
                 {
                     b.Navigation("Comments");
@@ -372,6 +500,8 @@ namespace chatApp.EF.Migrations
 
             modelBuilder.Entity("chatApp.CORE.Models.User", b =>
                 {
+                    b.Navigation("Conversations");
+
                     b.Navigation("Posts");
 
                     b.Navigation("Profile")

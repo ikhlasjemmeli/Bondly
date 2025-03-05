@@ -1,17 +1,17 @@
-<div style="width: 500px; height: 600px;">
-<h2 mat-dialog-title class="text-center border">Post Something Awesome</h2>
+<div style="width: 500px; height: 580px;" class="bg-light">
+<h2 mat-dialog-title class="text-center border-bottom">Post Something Awesome</h2>
 <form [formGroup]="AddPostForm">
 <mat-dialog-content >
     <div class="row">
         <div class="col-2">
-            <div class="d-flex justify-content-center m-2">
+            <div class="d-flex justify-content-center mx-2">
                 <div class="rounded-circle" style="width: 50px; height: 50px; overflow: hidden; background-color: #f0f0f0;">
                   <img src="https://miro.medium.com/v2/resize:fit:2400/2*Ip34iu-upqis6XbBVK3ARA.jpeg" alt="" class="img-fluid" style="width: 100%; height: 100%; object-fit: cover;">
                 </div>
             </div>
         </div>
     
-        <div class="col-10 text-left mt-2">
+        <div class="col-10 text-left ">
            <div class="row"> {{ProfileById.firstName}} {{ProfileById.lastName}}</div>
            <div class="row"><h5>{{ConvertDate(today)}} </h5>
           <div class="row">
@@ -21,7 +21,7 @@
         </div>
     </div>
     </div>
-    <div class="row mt-4">
+    <div class="row ">
       <mat-form-field  class="example-full-width">
         <mat-label>Privacy</mat-label>
         <mat-select formControlName="privacy" required>
@@ -37,7 +37,7 @@
             <textarea matInput placeholder="Ex. It makes me feel..." style="height: 90px;" formControlName="description"></textarea>
           </mat-form-field>
     </div>
-    <div class="row border border-secondary-subtle rounded m-1 text-center" style="height: 200px;" (click)="triggerFileInput()" >
+    <div class="row border border-secondary-subtle rounded mx-1 text-center" style="height: 200px;" (click)="triggerFileInput()" >
      <!--   <h1 class="text-center p-4 mt-5">Showcase Your Creativity</h1> -->
      <div class="cover-div" >
       <button class="cover" type="button"  aria-hidden="false">

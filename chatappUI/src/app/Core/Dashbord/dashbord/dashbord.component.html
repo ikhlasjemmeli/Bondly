@@ -1,39 +1,39 @@
 
-<div class="container-fluid text-center bg-body-secondary   "style="padding-top:69px;" >
+<div class="container-fluid text-center bg-body-secondary   "style="padding-top:63px; height:100vh;" >
 
    
-    <div class="row mt-4">
+    <div class="row " style="height: 91vh;">
       <!--statistics-->
-      <div class="col bg-light mt-1 m-4 rounded">
+      <div class="col bg-light m-1  rounded d-none d-lg-block " >
        <app-statistics></app-statistics>
       </div>
        <!-- Posts-->
-       <div class="col-6 bg-light mt-1 m-4 rounded ">
-        <div class="row m-4 justify-content-md-center" >
-          <div class="bg-body-secondary rounded ">
+       <div class="col  col-lg-7 m-1 rounded ">
+        <div class="row  justify-content-md-center" >
+          <div class="bg-light rounded ">
             <div class="row">
 
 
-              <div class="col-2 ">
-                <div class="d-flex justify-content-center m-2">
+              <div class="col-1 ">
+                <div class="d-flex justify-content-center my-2">
                   <div class="rounded-circle" style="width: 50px; height: 50px; overflow: hidden; background-color: #f0f0f0;">
                     <img src="https://miro.medium.com/v2/resize:fit:2400/2*Ip34iu-upqis6XbBVK3ARA.jpeg" alt="" class="img-fluid" style="width: 100%; height: 100%; object-fit: cover;">
                   </div>
                 </div>
                 
               </div>
-              <div class="col-10 p-2 mt-2">
-                <button mat-raised-button extended (click)="openDialog()" >Go ahead and share your thoughts—your voice matters!</button>
+              <div class="col-11 py-2 mt-2">
+                <button class="bg-secondary-subtle button_post" mat-raised-button extended (click)="openDialog()" >Go ahead and share your thoughts—your voice matters!</button>
               </div>
             </div>
           </div>
         </div>
-        <div class="row bg-body-secondary rounded m-4" style="height: 70vh; overflow-y: auto; width: 96%; overflow-x: hidden;">
+        <div class="row bg-light rounded mt-2" style="height: 80vh; overflow-y: auto; overflow-x: hidden;">
         <app-posts></app-posts>
         </div>
        </div>
        <!--Contacts-->
-       <div class="col bg-light mt-1 m-4 rounded" style="height: 85.5vh; overflow-y: auto;">
+       <div class="col bg-light m-1 d-none d-lg-block rounded" style="overflow-y: auto;">
         <app-chats></app-chats>
       </div>
     </div>

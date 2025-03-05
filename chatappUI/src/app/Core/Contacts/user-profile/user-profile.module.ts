@@ -7,6 +7,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatMenuModule } from '@angular/material/menu';
 import { SharedmoduleModule } from 'src/app/sharedmodule/sharedmodule.module';
+import { MatBottomSheetModule } from '@angular/material/bottom-sheet';
 
 
 @NgModule({
@@ -19,7 +20,9 @@ import { SharedmoduleModule } from 'src/app/sharedmodule/sharedmodule.module';
        MatIconModule,
         MatButtonModule,
         SharedmoduleModule,
-        MatMenuModule
+        MatMenuModule,
+        MatButtonModule, 
+        MatBottomSheetModule
   ]
 })
 export class UserProfileModule { }

@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 import { AuthServiceService } from 'src/app/Services/AuthService/auth-service.service';
 import { DeleteAccountComponent } from '../delete-account-post/delete-account.component';
 import { EditpasswordComponent } from '../editpassword/editpassword.component';
+import { ContactService } from 'src/app/Services/Contacts/contact.service';
 
 @Component({
   selector: 'app-profile',
@@ -16,6 +17,7 @@ import { EditpasswordComponent } from '../editpassword/editpassword.component';
 })
 export class ProfileComponent  implements OnInit{
 ProfileByIdSubscription : Subscription |undefined;
+FriendsSubscription :Subscription |undefined;
 postByUdSubscription : Subscription |undefined;
 currentView:string='posts';
 profileImage: string | ArrayBuffer |undefined | null = null ; 
@@ -24,15 +26,17 @@ selectedFile: File | null = null;
 @ViewChild('profileInput') profileInput: ElementRef |undefined ;
 @ViewChild('coverInput') coverInput: ElementRef |undefined ;
 
-  constructor(private profileService :ProfileService, private router :Router, private userService :AuthServiceService){}
+  constructor(private profileService :ProfileService, private router :Router, private userService :AuthServiceService , private contact : ContactService){}
 
   ProfileById =this.profileService.profileById;
 postsbyId = this.profileService.postsById;
+Friends = this.contact.Friends
 
   ngOnInit(): void {
     //get profile information
     this.ProfileByIdSubscription =this.profileService.profileById$.subscribe(p=>{
       this.ProfileById = p
+      console.log( 'profile',this.ProfileById)
     });
     this.profileService.getProfileById()
 
@@ -43,6 +47,12 @@ postsbyId = this.profileService.postsById;
       console.log('posts',this.postsbyId)
     });
     this.profileService.getPostById()
+
+    this.FriendsSubscription =this.contact.Friends$.subscribe(f=>{
+      this.Friends = f
+     
+    });
+    this.contact.getAllFriends()
     
   }
  dialog = inject(MatDialog);

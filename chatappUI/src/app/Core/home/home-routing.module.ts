@@ -44,6 +44,11 @@ const routes: Routes = [
         loadChildren: () => import('../Contacts/blocked/blocked.module').then(m=>m.BlockedModule),
         
       }
+      , {
+        path: 'Chats',
+        loadChildren: () => import('../ChatArea/area/area.module').then(m=>m.AreaModule),
+        
+      }
     ]}
 ];
 

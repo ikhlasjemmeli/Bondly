@@ -9,7 +9,13 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AuthServiceService } from 'src/app/Services/AuthService/auth-service.service';
 import { ContactService } from 'src/app/Services/Contacts/contact.service';
 import { HttpClient } from '@angular/common/http';
-
+import {
+  MatBottomSheet,
+  MatBottomSheetModule,
+  MatBottomSheetRef,
+} from '@angular/material/bottom-sheet';
+import { PopupChatComponent } from '../../ChatArea/popup-chat/popup-chat.component';
+import { ChatsService } from 'src/app/Services/chats/chats.service';
 @Component({
   selector: 'app-user-profile',
   templateUrl: './user-profile.component.html',
@@ -17,12 +23,14 @@ import { HttpClient } from '@angular/common/http';
 })
 
 export class UserProfileComponent  implements OnInit{
+  private _bottomSheet = inject(MatBottomSheet);
   friendRequestStatus:string="";
 block:boolean=true;
 mute:boolean=true;
 muteText:string="Mute messages"
 blockText:string="Block profile"
 FriendSubscription : Subscription |undefined;
+FriendOFUserSubscription :Subscription |undefined;
 BlockedUsersSubscription : Subscription |undefined;
 UserProfileByIdSubscription : Subscription |undefined;
 UserpostByUdSubscription : Subscription |undefined;
@@ -33,12 +41,13 @@ selectedFile: File | null = null;
 @ViewChild('profileInput') profileInput: ElementRef |undefined ;
 @ViewChild('coverInput') coverInput: ElementRef |undefined ;
 userId: string ="";
-  constructor(private http:HttpClient ,private profileService :ProfileService, private router :Router, private userService :AuthServiceService,private route: ActivatedRoute, private contact :ContactService){}
+  constructor(private http:HttpClient, private chat :ChatsService ,private profileService :ProfileService, private router :Router, private userService :AuthServiceService,private route: ActivatedRoute, private contact :ContactService){}
 
   UserProfileById =this.profileService.UserprofileById;
 UserpostsbyId = this.profileService.UserpostsById;
 BlokedUsers = this.contact.BlokedUsers;
 Friends=this.contact.Friends;
+FriendsOfUser=this.contact.FriendsOfUser;
   ngOnInit(): void {
     const connectedUserJson = localStorage.getItem('ConnectedUser');
     
@@ -48,6 +57,13 @@ Friends=this.contact.Friends;
       connectedUserid = connectedUser.id;
     }
     this.userId = this.route.snapshot.paramMap.get('id')!;
+
+
+    this.FriendOFUserSubscription =this.contact.FriendsOfUser$.subscribe(p=>{
+      this.FriendsOfUser = p
+    });
+    this.contact.getAllFriendsOfUser(this.userId)
+
 
     this.BlockedUsersSubscription =this.contact.BlokedUsers$.subscribe(p=>{
       this.BlokedUsers = p
@@ -199,6 +215,18 @@ Friends=this.contact.Friends;
   unfriend(){
     this.contact.unfriend(this.userId )
     this.friendRequestStatus = "Be My Friend";
+  }
+
+  openchat() :void {
+   if(window.innerWidth >992){
+    this._bottomSheet.open(PopupChatComponent, {
+      data: this.userId
+    });}
+    else{
+      this.router.navigate(['/home/Chats'])
+      this.chat.isContactOpen = true;
+      //this.chat.selectConversation("er") ;                     // a faire
+    }
   }
 
 }

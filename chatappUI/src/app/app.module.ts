@@ -48,6 +48,19 @@ import { SentModule } from './Core/Contacts/sent/sent.module';
 import { ReceivedModule } from './Core/Contacts/received/received.module';
 import { BlockedComponent } from './Core/Contacts/blocked/blocked.component';
 import { BlockedModule } from './Core/Contacts/blocked/blocked.module';
+import { AreaComponent } from './Core/ChatArea/area/area.component';
+import { AreaModule } from './Core/ChatArea/area/area.module';
+import { ContactComponent } from './Core/ChatArea/contact/contact.component';
+import { SettingsComponent } from './Core/ChatArea/settings/settings.component';
+import { SettingsModule } from './Core/ChatArea/settings/settings.module';
+import { PopupColorsComponent } from './Core/ChatArea/popup-colors/popup-colors.component';
+import { PopupEmojiComponent } from './Core/ChatArea/popup-emoji/popup-emoji.component';
+import { PopupNamesComponent } from './Core/ChatArea/popup-names/popup-names.component';
+import { PopupChatComponent } from './Core/ChatArea/popup-chat/popup-chat.component';
+import { MatListModule } from '@angular/material/list';
+import { MatCardModule } from '@angular/material/card';
+import { MatIconModule } from '@angular/material/icon';
+import { PickerModule } from '@ctrl/ngx-emoji-mart';
 
 
 @NgModule({
@@ -59,16 +72,13 @@ import { BlockedModule } from './Core/Contacts/blocked/blocked.module';
     EditprofileComponent,
     DeleteAccountComponent,
     EditpasswordComponent,
-    //BlockedComponent,
-   
-   // UserProfileComponent,
-  //  ContactsComponent,
+    PopupColorsComponent,
+    PopupEmojiComponent,
+    PopupNamesComponent,
+    PopupChatComponent,
+
   
-    //ProfileComponent,
-    //HomeComponent,
-   // PostsComponent,
-   // ChatsComponent,
-  //StatisticsComponent
+    
    
    
    
@@ -101,6 +111,14 @@ import { BlockedModule } from './Core/Contacts/blocked/blocked.module';
      SentModule,
      ReceivedModule,
      BlockedModule,
+     AreaModule,
+     MatListModule,
+      MatCardModule,
+      MatIconModule, 
+       PickerModule,
+       MatButtonModule,
+    // ContactsModule,
+    // SettingsModule,
     //StatisticsModule,
     ToastrModule.forRoot({ // Configuration globale
       timeOut: 3000, // Durée par défaut des toasts (ms)

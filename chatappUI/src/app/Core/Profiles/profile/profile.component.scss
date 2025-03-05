@@ -1,3 +1,14 @@
+*{
+  margin: 0;
+  padding: 0;
+}
+
+.profile{
+  padding-left:15% ; 
+  padding-right : 15% ;
+  padding-top:69px; 
+}
+
 .icon{
     // position: absolute;
       width: 150px;
@@ -45,11 +56,11 @@
     // position: absolute;
       width: 100%;
       height: 100%;
-      background-color: rgb(238, 236, 236); 
+     // background-color: rgb(238, 236, 236); 
       cursor: pointer;
      // border-radius: 50%;
      border: none;
-   
+     
       
       
   }
@@ -57,28 +68,106 @@
   .cover-div {
     position: relative;
     width: 100%;
-    height: 200px;
+    height: 250px;
    // border-radius: 50%;
     overflow: hidden;
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #f0f0f0;
+   // background-color: #f0f0f0;
    // bottom: 20px; 
     //left: 30%; 
     
   }
 
   .cover-image {
-    // position: absolute;
+    
      width: 100%;
-     height: 95%;
+     height:auto;
      object-fit: cover;
-    // border-radius: 50%;
-    // left: -18%;
-    // top:-3%;
     justify-content: center;
     align-items: center;
-   
+  // margin:0px;
+  //padding-top:1;
+  //padding-bottom: 10px;
+
      
    }
+
+
+   @media (max-width: 600px) {
+    .profile{
+      padding-left:1% ; 
+    padding-right : 1%;
+     
+    }
+
+    .cover-div {
+      height: 150px;
+    }
+
+    .camera-cercle {
+      position: relative;
+      width: 100px;
+      height: 100px;}
+}
+
+@media (max-width: 1290px) {
+  .profile{
+    padding-left:5% ; 
+    padding-right : 5% ;
+   
+  }
+
+}
+
+@media (max-width: 400px) {
+  .profile{
+    padding-left:1% ; 
+    padding-right : 1%;
+    overflow-x: hidden;
+   
+  }
+
+}
+
+
+/* Taille de la police par défaut */
+h1 {
+  font-size: 2rem;
+}
+
+/* Taille de la police pour les écrans de petite taille */
+@media (max-width: 576px) {
+  h1 {
+    font-size: 1rem;
+  }
+}
+
+/* Taille de la police pour les écrans moyens */
+@media (min-width: 577px) and (max-width: 768px) {
+  h1 {
+    font-size: 1.2rem;
+  }
+}
+
+/* Taille de la police pour les écrans larges */
+@media (min-width: 769px) {
+  h1 {
+    font-size: 1.3rem;
+  }
+}
+
+@media (min-width: 900px) {
+  h1 {
+    font-size: 1.5rem;
+  }
+}
+
+@media (min-width: 1200px) {
+  h1 {
+    font-size: 1.8rem;
+  }
+}
+
+   

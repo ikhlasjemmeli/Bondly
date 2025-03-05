@@ -42,5 +42,8 @@ profileById= this.profileService.profileById
     this.router.navigate(['/home/Blocked users']);
   }
 
+  navigateToChat(){
+    this.router.navigate(['/home/Chats']);
+  }
 
 }

@@ -22,6 +22,8 @@ namespace chatApp.CORE.Models
 
         [JsonIgnore]
         public ICollection<User> BlockedUsers { get; set; } = new List<User>();
+        public ICollection<Conversation> Conversations { get; set; } = new List<Conversation>();
+
 
         public User()
         {
@@ -30,7 +32,7 @@ namespace chatApp.CORE.Models
             SentRequests = new List<FriendRequest>();
             ReceivedRequests = new List<FriendRequest>();
             BlockedUsers = new List<User>();
-
+            Conversations = new List<Conversation>();
 
         }
 

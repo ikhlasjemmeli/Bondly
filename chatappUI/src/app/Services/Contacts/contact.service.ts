@@ -18,6 +18,10 @@ export class ContactService {
   Friends$ =this.FriendSubject.asObservable();
   Friends:any;
 
+  private FriendsOfUserSubject =new BehaviorSubject<any[]>([]);
+  FriendsOfUser$ =this.FriendsOfUserSubject.asObservable();
+  FriendsOfUser:any;
+  
   baseUrl = 'https://localhost:7166/api/User/'
   constructor(private http:HttpClient) { }
 
@@ -165,6 +169,20 @@ getAllFriends(){
     }
   )
 }}
+
+
+
+getAllFriendsOfUser(UserId:string){
+  
+  this.http.get(`https://localhost:7166/api/FriendRequest/getAllFriends?UserId=${UserId}`).subscribe(
+    (data:any)=>{
+      this.FriendsOfUserSubject.next(data);
+    
+    }, error=>{
+      console.log("error:", error.error)
+    }
+  )
+}
 
 
 ReplyToRequest(response:boolean, userId:any): Observable<any> {

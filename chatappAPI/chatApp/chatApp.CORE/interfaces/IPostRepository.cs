@@ -10,5 +10,6 @@ namespace chatApp.CORE.interfaces
         IEnumerable<Post> GetAllPostsById(string UserId);
         Task<string> AddComment(string UserId, string PostId, CommentDto comment);
         IEnumerable<Comment> GetAllCommentsById(string PostId);
+        IEnumerable<Post> GetFriendsPosts(string UserId);
     }
 }

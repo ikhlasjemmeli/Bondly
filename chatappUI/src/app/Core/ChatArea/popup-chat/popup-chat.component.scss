@@ -1,0 +1,161 @@
+mat-nav-list {
+  width: 500px;
+}
+
+
+
+input:focus {
+    outline: none; 
+    border: none;  
+  }
+  /*
+  .message-card {
+    display: flex;
+    justify-content: flex-start;
+  }
+  
+
+  .message-me {
+    justify-content: flex-start;
+  }
+  
+  .message-friend {
+    justify-content: flex-end;
+  }
+  
+  .bg-blue {
+    background-color: rgb(60, 60, 249);
+    color: white;
+  }
+  
+  .bg-white {
+    background-color: white;
+    color: black;
+  }
+*/
+
+
+
+.message-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-bottom: 10px;
+ // margin-left: 30px;
+ 
+}
+
+.message-me {
+  align-items: flex-end;
+ // margin-right: 50px;
+}
+
+.message-friend {
+  align-items: flex-start;
+}
+
+.message-card-container {
+  display: flex;
+  flex-direction: column;
+  max-width: 50%; /* Ne dépasse pas le centre */
+  min-width: auto; /* S'ajuste à la taille du texte */
+  height: auto; /* Pas de hauteur fixe */
+  word-wrap: break-word; /* Coupe le texte si nécessaire */
+}
+
+.message-card {
+  max-width: 100%; /* Ne dépasse pas le conteneur */
+  min-width: fit-content; /* Ajuste la largeur selon le texte */
+  word-wrap: break-word; /* Assure que le texte reste bien lisible */
+}
+/*
+.message-card-container {
+  display: flex;
+  flex-direction: column;
+  max-width: 60%;
+  height: 100%;
+}*/
+
+.message-time {
+  font-size: 12px;
+  color: gray;
+  margin-top: 2px;
+  align-self: flex-end; /* Pour aligner la date selon l'expéditeur */
+}
+
+.message-me .message-time {
+  text-align: right;
+}
+
+.message-friend .message-time {
+  text-align: left;
+}
+
+.date-separator {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  font-size: 14px;
+  color: gray;
+  margin: 20px 0;
+  font-weight: bold;
+  position: relative;
+  width: 100%;
+}
+
+.date-separator::before, .date-separator::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: gray;
+}
+
+.date-separator span {
+  padding: 0 10px;
+  white-space: nowrap;
+}
+
+.text-my-green {
+  color: #0ce03d !important; /* Un vert personnalisé */
+}
+  
+  .emoji-picker-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    bottom: 50px;
+    right:5vh;
+    z-index: 1000;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    height: 50vh;
+    width: 50vh;
+    overflow-y: auto;
+  }
+  
+  .custom-emoji-mart .emoji-mart {
+    background: #f8f9fa !important;
+    border-radius: 10px !important;
+    border: 1px solid #ddd !important;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1) !important;
+  }
+  
+  .custom-emoji-mart .emoji-mart-category-label {
+    background: #ffcc00 !important;
+    color: #333 !important;
+    font-weight: bold !important;
+  }
+  
+  .custom-emoji-mart .emoji-mart-search input {
+    border-radius: 6px !important;
+    border: 1px solid #ccc !important;
+    padding: 8px !important;
+    outline: none !important;
+    font-size: 14px !important;
+  }
+  
+  .custom-emoji-mart .emoji-mart-emoji:hover {
+    transform: scale(1.2) !important;
+    transition: 0.2s ease-in-out !important;
+  }

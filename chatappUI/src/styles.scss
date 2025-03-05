@@ -1,4 +1,78 @@
 /* You can add global styles to this file, and also import other style files */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+
 @import 'ngx-toastr/toastr';
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif;  }
+
+
+/* Réinitialiser les styles de la catégorie */
+::ng-deep .emoji-mart-category {
+    display: inline-block !important;
+    margin-right: 10px !important;
+    margin-bottom: 5px !important;
+  }
+  
+  /* Réinitialiser le conteneur des catégories pour s'assurer qu'il utilise une mise en page flexible */
+  ::ng-deep .emoji-mart-category-buttons {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    justify-content: flex-start !important;
+  }
+  
+
+
+  /* Mode nuit */
+.dark-mode {
+  background-color: #121212 !important;
+  color: #ffffff !important;
+}
+
+.dark-mode .navbar {
+  background-color: #3b3b3b !important;
+}
+
+.dark-mode .bg-light {
+  background-color: #333 !important;
+}
+.dark-mode .bg-body-secondary {
+  background-color: #1e1e1e !important;
+}
+.dark-mode .text-left, 
+.dark-mode .fs-3, 
+.dark-mode .fs-2 {
+  color: #ffffff !important;
+}
+
+.dark-mode input {
+  //background-color: #444 !important;
+  color: #333 !important;
+ // border: 1px solid #777 !important;
+}
+
+.fixed-icons {
+  background-color: rgb(221, 218, 218) !important;
+  color: black !important;
+  border-radius: 50%;
+  height: 40px;
+  width: 40px;
+
+}
+
+.dark-mode .fixed-icons {
+  background-color: white !important;
+  color: black !important;
+}
+
+.dark-mode mat-divider{
+  border-color: white !important;
+}
+
+.dark-mode .border-body-secondary{
+border-color: #1e1e1e !important;
+}

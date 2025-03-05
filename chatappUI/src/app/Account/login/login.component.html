@@ -1,5 +1,5 @@
 
-<div class="container-fluid login-container">
+<div class="container-fluid login-container" style="background-image: url('../../../assets/back.png'); background-repeat: no-repeat;background-size:cover;" >
   <div class="login-box">
     <div class="row position-relative">
       <!-- Section du formulaire -->
@@ -18,7 +18,7 @@
 
           <small class="forgot-password" (click)="openDialog()">Forgot your password?</small>
 
-          <button class="login-btn"  mat-flat-button color="primary" [disabled]="!loginForm.valid" (click)="Login()">
+          <button class="login-btn "  mat-flat-button color="primary" [disabled]="!loginForm.valid" (click)="Login()">
             Login
           </button>
         </form>
@@ -30,8 +30,8 @@
       </div>
 
       <!-- Section de l'illustration -->
-      <div class="col-md-6 d-none d-lg-block illustration-section position-absolute end-0 top-0">
-        <img src="../../../assets/login.png" alt="Login Illustration">
+      <div class="col-md-6 d-none d-md-block illustration-section position-absolute end-0 top-0   ">
+        <img src="../../../assets/login.png" alt="Login Illustration" >
       </div>
     </div>
   </div>

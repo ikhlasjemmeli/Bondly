@@ -27,3 +27,40 @@
     transition: opacity 0.3s ease-in-out;
   }
   
+
+  .sent{
+    padding-top: 3%;
+     height: 100vh;
+  }
+
+  @media (max-width: 1290px) {
+    .sent{
+      padding-top: 7%;
+      
+    }
+  
+  }
+
+  @media (max-width: 900px) {
+    .sent{
+      padding-top: 10%;
+      
+    }
+  
+  }
+
+  @media (max-width: 650px) {
+    .sent{
+      padding-top: 13%;
+      
+    }
+  
+  }
+
+  @media (max-width: 470px) {
+    .sent{
+      padding-top: 22%;
+      
+    }
+  
+  }

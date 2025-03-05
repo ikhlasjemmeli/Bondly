@@ -49,13 +49,38 @@ namespace chatApp.EF
          .HasOne(fr => fr.Sender)
          .WithMany(u => u.SentRequests)
          .HasForeignKey(fr => fr.SenderId)
-         .OnDelete(DeleteBehavior.Restrict);  // Empêche la suppression en cascade
+         .OnDelete(DeleteBehavior.Restrict);  
 
             modelBuilder.Entity<FriendRequest>()
                 .HasOne(fr => fr.Receiver)
                 .WithMany(u => u.ReceivedRequests)
                 .HasForeignKey(fr => fr.ReceiverId)
                 .OnDelete(DeleteBehavior.Restrict);
+
+
+            modelBuilder.Entity<Conversation>()
+       .HasOne(c => c.User1)
+       .WithMany()
+       .HasForeignKey(c => c.User1Id)
+       .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<Conversation>()
+                .HasOne(c => c.User2)
+                .WithMany()
+                .HasForeignKey(c => c.User2Id)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<Message>()
+                .HasOne(m => m.Sender)
+                .WithMany()
+                .HasForeignKey(m => m.SenderId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<Message>()
+                .HasOne(m => m.Conversation)
+                .WithMany(c => c.Messages)
+                .HasForeignKey(m => m.ConversationId)
+                .OnDelete(DeleteBehavior.Cascade);
 
             base.OnModelCreating(modelBuilder);
         }
@@ -68,6 +93,8 @@ namespace chatApp.EF
         public DbSet<Reaction> Reactions { get; set; }
         public DbSet<Comment> Comments { get; set; }
         public DbSet<FriendRequest> FriendRequests { get; set; }
+        public DbSet<Message> Messages { get; set; }
+        public DbSet<Conversation> Conversations { get; set; }
     }
 
 }

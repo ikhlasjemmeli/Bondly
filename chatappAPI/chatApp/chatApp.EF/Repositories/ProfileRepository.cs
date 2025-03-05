@@ -14,7 +14,7 @@ namespace chatApp.EF.Repositories
         }
         public async Task<object> getProfileById(Guid UserId)
         {
-            User user = await _context.Users.Include(u=>u.Friends).Include(u=>u.BlockedUsers).Include(u=>u.SentRequests).Include(u => u.ReceivedRequests).FirstOrDefaultAsync(u => u.Id == UserId);
+            User user = await _context.Users.Include(u=>u.Friends).Include(u=>u.BlockedUsers).Include(u=>u.SentRequests).Include(u => u.ReceivedRequests).Include(u => u.Conversations).FirstOrDefaultAsync(u => u.Id == UserId);
             var Profile = _context.Profiles.FirstOrDefault(u => u.UserId == UserId);
             var Posts = _context.Posts.Where(u => u.UserId == UserId);
             var ProfileDto = new
@@ -30,6 +30,7 @@ namespace chatApp.EF.Repositories
                 Email = user.Email,
                 DateOfBirth = user.DateOfBirth,
                 Posts = Posts.Count(),
+                Chats = _context.Conversations.Where(c=>c.User1Id ==user.Id && c.User2Id ==user.Id).Count(),
                 Friends= user.Friends.Count(),
                 BlockedUsers = user.BlockedUsers.Count(),
                 sentRequests = user.SentRequests.Select(sent =>new

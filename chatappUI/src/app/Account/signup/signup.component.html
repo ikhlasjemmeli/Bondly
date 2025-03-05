@@ -1,9 +1,10 @@
-<div class="container  login-container" >
-    <div class="row" style=" border-radius: 10px; box-shadow: 0px 0px 50px 20px rgb(190, 190, 190); height: 90vh; margin-top: 5vh;">
+<!--<div class="container-fluid login-container" style="z-index:1;background-image: url('../../../assets/back.png'); background-repeat: no-repeat;background-size:cover;" >
+  <div class="container  login-container text-center" style="z-index:1000;">
+    <div class="row " style=" border-radius: 10px; box-shadow: 0px 0px 50px 20px rgb(190, 190, 190); height: 70vh;">
      
-        <div class="col-md-6 d-none d-lg-block illustration-section " style=" margin-top: 2vh;">
+        <div class="col-md-4 d-none d-lg-block illustration-section " style=" margin-top: 2vh;">
            
-                <img src="../../../assets/signup.png" alt="Login Illustration">
+                <img src="../../../assets/signup.png" alt="Login Illustration" style="height: 400px;">
            
         </div>
        
@@ -11,14 +12,22 @@
             <div class="  text-center  " >
                 <h1 class="text-center" style="font-weight: bold;  margin-left: -90px;" class="title">Sign up</h1>
                 <form class="example-form" [formGroup]="SignUpForm" >
+                  <div class="row">
+                    <div class="col">
                     <mat-form-field class="example-full-width">
                       <mat-label>FirstName</mat-label>
                        <input matInput placeholder="Ex. John" formControlName="firstName" required>
                     </mat-form-field>
+                  </div>
+                  <div class="col">
                     <mat-form-field class="example-full-width">
                         <mat-label>LastName</mat-label>
                         <input matInput placeholder="Ex. Doe" formControlName="lastName" required>
                       </mat-form-field>
+                    </div>
+                    </div>
+                    <div class="row">
+                      <div class="col">
                       <mat-form-field class="example-full-width">
                         <mat-label>Date of birth</mat-label>
                         <input matInput [matDatepicker]="picker" formControlName="dateOfBirth" required>
@@ -26,21 +35,29 @@
                         <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
                         <mat-datepicker #picker></mat-datepicker>
                       </mat-form-field>
-                      
+                    </div>
+                    <div class="col">
                       
                       <mat-form-field class="example-full-width">
                         <mat-label>Email</mat-label>
                         <input matInput placeholder="Ex. John.Doe@gmail.com" formControlName="email" required>
                       </mat-form-field>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col">
                       <mat-form-field class="example-full-width">
                         <mat-label>Password</mat-label>
                         <input type="password" matInput placeholder="" formControlName="password" required>
                       </mat-form-field>
+                      </div>
+                      <div class="col">
                       <mat-form-field class="example-full-width">
                         <mat-label>Confirm Password</mat-label>
                         <input type="password" matInput placeholder="" formControlName="confirmPassword" required>
                       </mat-form-field>
-                      
+                      </div>
+                      </div>
                       <div class="form-check mx-5 px-4">
                         <input class="form-check-input border border-2 border-black" type="checkbox" value="" id="flexCheckDefault" formControlName="acceptCondition" required>
                       
@@ -64,4 +81,90 @@
             </div>
         </div>
     </div>
+</div>
+</div> -->
+
+<div class="container-fluid login-container" style="z-index:1;background-image: url('../../../assets/back.png'); background-repeat: no-repeat;background-size:cover;" >
+  <div class="login-box" >
+    <div class="row position-relative" >
+     
+        <div class="col-md-4 d-none d-md-block illustration-section position-absolute start-0 top-0  ">
+           
+                <img src="../../../assets/signup.png" alt="Login Illustration" >
+           
+        </div>
+       
+        <div class="col-md-8 text-right position-absolute end-0 top-0 right-col" >
+            <div class="  text-center  " >
+                <h1 class="text-center" style="font-weight: bold;  margin-left: -90px;" class="title">Sign up</h1>
+                <form class="example-form" [formGroup]="SignUpForm">
+                  <div class="row gx-0">
+                    <div class="col-md-6">
+                      <mat-form-field class="example-full-width">
+                        <mat-label>First Name</mat-label>
+                        <input matInput placeholder="Ex. John" formControlName="firstName" required>
+                      </mat-form-field>
+                    </div>
+                    <div class="col-md-6">
+                      <mat-form-field class="example-full-width">
+                        <mat-label>Last Name</mat-label>
+                        <input matInput placeholder="Ex. Doe" formControlName="lastName" required>
+                      </mat-form-field>
+                    </div>
+                  </div>
+                
+                  <div class="row gx-0">
+                    <div class="col-md-6">
+                      <mat-form-field class="example-full-width">
+                        <mat-label>Date of birth</mat-label>
+                        <input matInput [matDatepicker]="picker" formControlName="dateOfBirth" required>
+                        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
+                      </mat-form-field>
+                    </div>
+                    <div class="col-md-6">
+                      <mat-form-field class="example-full-width">
+                        <mat-label>Email</mat-label>
+                        <input matInput placeholder="Ex. John.Doe@gmail.com" formControlName="email" required>
+                      </mat-form-field>
+                    </div>
+                  </div>
+                
+                  <div class="row gx-0">
+                    <div class="col-md-6">
+                      <mat-form-field class="example-full-width">
+                        <mat-label>Password</mat-label>
+                        <input type="password" matInput placeholder="" formControlName="password" required>
+                      </mat-form-field>
+                    </div>
+                    <div class="col-md-6">
+                      <mat-form-field class="example-full-width">
+                        <mat-label>Confirm Password</mat-label>
+                        <input type="password" matInput placeholder="" formControlName="confirmPassword" required>
+                      </mat-form-field>
+                    </div>
+                  </div>
+                
+                  <div class="form-check mx-5 px-4">
+                    <input class="form-check-input border border-2 border-black" type="checkbox" value="" id="flexCheckDefault" formControlName="acceptCondition" required>
+                    I agree to create an account and register on this platform.
+                  </div>
+                
+                  <div class="example-flex-container mt-3 text-center">
+                    <button class="login-btn" style="background-color: rgb(34, 53, 224); color: white;" mat-fab extended [disabled]="!SignUpForm.valid || !ConfirmPassword()" (click)="SignUp()">
+                      CREATE ACCOUNT
+                    </button>
+                  </div>
+                
+                  <h4 class="text-center mt-3">Already have an account ? 
+                    <a style="cursor: pointer;" [routerLink]="['/Login']" class="signup-text fw-bold">Sign in</a>
+                  </h4>
+                </form>
+                
+                 
+              
+            </div>
+        </div>
+    </div>
+</div>
 </div>
